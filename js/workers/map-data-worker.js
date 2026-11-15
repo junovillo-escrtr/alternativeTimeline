@@ -19,7 +19,6 @@ self.onmessage=async()=>{
   const features=topology.objects.provinces.geometries.map(g=>({type:'Feature',id:g.id,properties:g.properties||{},bbox:g.bbox,geometry:{type:g.type,coordinates:g.type==='Polygon'?g.arcs.map(stitch):g.type==='MultiPolygon'?g.arcs.map(poly=>poly.map(stitch)):null}}));
   for(const [fi,qx,qy,x,y] of topology.coordinateOverrides||[]){const f=features[fi];if(!f)continue;const walk=a=>{if(!Array.isArray(a))return;if(a.length>=2&&typeof a[0]==='number'&&typeof a[1]==='number'){if(Math.round(a[0]*12)===qx&&Math.round(a[1]*12)===qy){a[0]=x;a[1]=y;}return;}for(const v of a)walk(v)};walk(f.geometry.coordinates);}
   const data={type:'FeatureCollection',name:topology.name,coordinateSystem:topology.coordinateSystem,source:topology.source,bbox:topology.bbox,oceanProvinceIds:topology.oceanProvinceIds||[],landProvinceCount:topology.landProvinceCount,oceanProvinceCount:topology.oceanProvinceCount,geometryQuality:topology.geometryQuality,features};
-  postMessage(data);
-  self.postMessage({type:'metrics',totalMs:performance.now()-totalStart,inflateMs,parseMs,decodeMs:performance.now()-decodeStart,compressedBytes:bytes.length,rawBytes:raw.byteLength,arcCount:decodedArcs.length});
+  postMessage({data,metrics:{totalMs:performance.now()-totalStart,inflateMs,parseMs,decodeMs:performance.now()-decodeStart,compressedBytes:bytes.length,rawBytes:raw.byteLength,arcCount:decodedArcs.length}});
  }catch(error){postMessage({error:error?.message||String(error)})}
 };
