@@ -34,7 +34,7 @@ window.__LTA_LOAD_MAP_DATA=()=>{
     const data=await new Promise((resolve,reject)=>{
      const worker=new Worker('js/workers/map-data-worker.js');
      const finish=()=>worker.terminate();
-     worker.onmessage=e=>{finish();if(e.data?.error)reject(new Error(e.data.error));else resolve(e.data)};
+     worker.onmessage=e=>{finish();if(e.data?.error)reject(new Error(e.data.error));else resolve(e.data?.data||e.data)};
      worker.onerror=e=>{finish();reject(new Error(e.message||'Falló el trabajador cartográfico.'))};
      worker.postMessage({type:'load'});
     });
