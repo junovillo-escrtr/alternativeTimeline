@@ -72,19 +72,33 @@ async function refreshGameBorders(key){
  if(gBorderKey===key&&gBorderLayer){if(!gmap.hasLayer(gBorderLayer))gBorderLayer.addTo(gmap);return}
  const token=++gBorderToken,borderStart=performance.now();
  try{
-  const records=await window.__LTA_LOAD_BORDER_DATA(),lines=[],oceans=window.__LTA_OCEAN_IDS||new Set();
+  // El cargador y su conjunto de datos se descargan solo cuando la vista política necesita fronteras.
+  if(typeof window.__LTA_LOAD_BORDER_DATA!=='function'){
+   if(!window.LTA?.loadScript)throw new Error('No está disponible el cargador común de módulos.');
+   await window.LTA.loadScript('js/core/border-data-loader.js');
+  }
+  const loadBorderData=window.__LTA_LOAD_BORDER_DATA;
+  if(typeof loadBorderData!=='function')throw new Error('border-data-loader.js no ha registrado __LTA_LOAD_BORDER_DATA.');
+  const records=await loadBorderData(),latlngs=[],oceans=window.__LTA_OCEAN_IDS||new Set();
+  let pointCount=0;
+  // El filtrado se divide en lotes para no bloquear el hilo principal con decenas de miles de fronteras.
   for(let i=0;i<records.length;i++){
    const [a,b,line]=records[i],ao=oceans.has(a),bo=oceans.has(b);
-   if(ao&&bo)continue;
-   if(ao!==bo||owner(String(a))!==owner(String(b)))lines.push(line);
+   if(!(ao&&bo)&&(ao!==bo||owner(String(a))!==owner(String(b)))){
+    latlngs.push(line.map(p=>[p[1],p[0]]));
+    pointCount+=line.length;
+   }
+   if(i>0&&i%4096===0){
+    if(token!==gBorderToken)return;
+    await new Promise(resolve=>setTimeout(resolve,0));
+   }
   }
   if(token!==gBorderToken||key!=='political|'+territorySignature())return;
   if(gBorderLayer&&gmap.hasLayer(gBorderLayer))gmap.removeLayer(gBorderLayer);
-  const latlngs=lines.map(line=>line.map(p=>[p[1],p[0]]));
   gBorderLayer=L.polyline(latlngs,{renderer:gmap.options.renderer||L.canvas({padding:0.25}),smoothFactor:0.3,interactive:false,color:'#263746',weight:1.15,opacity:.95,lineCap:'round',lineJoin:'round'});
   gBorderKey=key;
   gBorderLayer.addTo(gmap);
-  console.info('[LTA rendimiento] Fronteras políticas', {tramos:lines.length,puntos:lines.reduce((n,l)=>n+l.length,0),ms:+(performance.now()-borderStart).toFixed(1)});
+  console.info('[LTA rendimiento] Fronteras políticas',{tramos:latlngs.length,puntos:pointCount,ms:+(performance.now()-borderStart).toFixed(1)});
  }catch(err){if(token===gBorderToken){console.error('Error al construir los límites territoriales:',err);$('gameStatus').textContent='Mapa cargado, pero no se pudieron dibujar los límites: '+(err.message||'error')}}
 }
 function refreshGameMapStyles(){
