@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LTA Scenario",
+  "type": "object",
+  "required": [
+    "dates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.0\\.0$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "dates": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/dateState"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "nation": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "sovereign",
+            "semi",
+            "non"
+          ]
+        },
+        "overlord": {
+          "type": "string"
+        },
+        "leader": {
+          "type": "string"
+        },
+        "government": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "flag": {
+          "type": "string"
+        },
+        "coat": {
+          "type": "string"
+        },
+        "portrait": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "concession": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "concessionaire": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "suspended",
+            "negotiation",
+            "ended"
+          ]
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "competencies": {
+          "type": "object"
+        },
+        "finance": {
+          "type": "object"
+        },
+        "urbanAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "thirdPartyPresence": {
+          "type": "array"
+        },
+        "institutions": {
+          "type": "array"
+        },
+        "history": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
+    },
+    "dateState": {
+      "type": "object",
+      "properties": {
+        "nations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nation"
+          }
+        },
+        "ownership": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "capitals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "administrations": {
+          "type": "array"
+        },
+        "concessions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/concession"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
