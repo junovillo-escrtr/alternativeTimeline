@@ -153,3 +153,37 @@ input::placeholder,textarea::placeholder{color:#77777f}
 .sphere-card{display:flex;flex-direction:column;gap:7px;min-height:155px}.sphere-status{align-self:flex-start;padding:3px 7px;border:1px solid #60717a;border-radius:3px;font-size:8px;letter-spacing:.12em;color:#c5cdd0}.is-exclusive .sphere-status{border-color:#b38a55;color:#e3c38f}.is-recognized .sphere-status{border-color:#789a87;color:#a9c9b2}.sphere-lead{display:flex;justify-content:space-between;align-items:center;margin-top:auto;font-size:10px;color:#c7d0d1}.sphere-lead strong{font:600 21px Georgia,serif;color:#e5c68f}.sphere-stack{display:flex;height:7px;overflow:hidden;border-radius:5px;background:#121a20}.sphere-stack i{height:100%;border-right:1px solid #172129}.sphere-share{margin:10px 0}.sphere-share>div:first-child{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#c9d1d1}.sphere-share>div:first-child span{display:flex;align-items:center;gap:7px}.sphere-share>div:first-child i{width:8px;height:8px;border-radius:2px}.sphere-share>div:first-child b{color:#e4c58d}.sphere-share-track{margin-top:5px}.sphere-share-track i{display:block;height:100%}
 @media(max-width:850px){.regional-layout,.sphere-layout{grid-template-columns:1fr}.geo-detail{min-height:220px}.geo-legend{margin-left:0;width:100%}}
 @media(max-width:560px){.geopolitical-view{padding:12px}.geopolitical-heading{gap:8px}.geo-view-mark{font-size:8px}.regional-atlas,.sphere-atlas{grid-template-columns:1fr}.geo-toolbar select{flex:1;min-width:0}}
+
+
+/* v0.10.1 — paneles de detalle geopolítico y panel lateral plegable */
+.game-side{display:flex!important;position:relative;flex:0 0 310px;width:310px;min-width:240px;transition:flex-basis .24s ease,width .24s ease,min-width .24s ease;overflow:visible}
+.game-side.collapsed{flex-basis:0!important;width:0!important;min-width:0!important;border:0!important;padding:0!important}
+.game-side.collapsed .sidehead,.game-side.collapsed .game-side-content{display:none!important}
+.game-side-toggle{position:absolute;left:-29px;top:50%;transform:translateY(-50%);z-index:80;width:29px;height:58px;border:1px solid #66563c;border-right:0;border-radius:8px 0 0 8px;background:#29251f;color:#e8d4ad;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:-4px 2px 12px #0005}
+.game-side-toggle:hover{background:#3b3326;border-color:#c5a46d}
+.game-side.collapsed .game-side-toggle{left:-30px;border-right:1px solid #66563c;border-radius:8px 0 0 8px}
+.regional-layout,.sphere-layout{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(340px,1.2fr);grid-template-rows:auto minmax(320px,1fr);gap:12px;max-width:1500px;margin:auto;min-height:420px}
+.geo-selector{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;max-height:120px;overflow:auto}
+.geo-selector .regional-card,.geo-selector .sphere-card{min-height:0;flex:0 1 210px;padding:9px 12px}
+.geo-selector .regional-card-index,.geo-selector .regional-card-arrow{display:none}
+.geo-detail{grid-column:1;grid-row:2;overflow:auto;max-height:calc(100vh - 370px)}
+.geo-map-panel{grid-column:2;grid-row:2;min-height:320px;border:1px solid #45545c;border-radius:8px;background:#18232a;overflow:hidden;display:flex}
+.geo-map-placeholder{margin:auto;max-width:360px;padding:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;color:#aebbc1}
+.geo-map-placeholder>span{font-size:42px;color:#7f9aa5}
+.geo-map-placeholder>b{font:600 20px Georgia,serif;color:#e9ddc9}
+.geo-map-placeholder small{font-size:11px;line-height:1.6;color:#98aab2}
+.sphere-primacy{padding:12px 0;border-block:1px solid #3b4a52;margin:10px 0}
+.sphere-primacy>small{font-size:9px;letter-spacing:.13em;color:#c4a775;font-weight:800}
+.sphere-primacy>div{display:flex;align-items:center;gap:9px;margin-top:8px}
+.sphere-primacy img{width:42px;height:28px;object-fit:cover;border:1px solid #66727a;border-radius:3px;background:#111}
+.sphere-primacy b{font:600 18px Georgia,serif;color:#f0e3cf;flex:1}
+.sphere-primacy strong{font-size:20px;color:#d9bd8a}
+.sphere-stack-large{height:14px!important;display:flex;gap:0!important}
+.sphere-stack-large i{height:100%;display:block}
+.sphere-flags{display:flex;justify-content:space-around;gap:6px;padding:8px 0}
+.sphere-flag-item{min-width:0;flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.sphere-flag-item img{width:27px;height:18px;object-fit:cover;border:1px solid #59646b;border-radius:2px}
+.sphere-flag-item small{font-size:10px;color:#e5d2ac}
+.sphere-flag-item em{font-style:normal;font-size:9px;color:#aebbc1;overflow-wrap:anywhere}
+@media(max-width:900px){.game-side{flex-basis:260px;width:260px;min-width:220px}.regional-layout,.sphere-layout{grid-template-columns:1fr;grid-template-rows:auto auto minmax(280px,1fr)}.geo-detail,.geo-map-panel{grid-column:1;grid-row:auto;max-height:none}.geo-map-panel{min-height:280px}}
+@media(max-width:620px){.game-side{display:flex!important;position:absolute;z-index:90;right:0;top:0;bottom:0;width:min(86vw,340px);min-width:0;flex-basis:min(86vw,340px);box-shadow:-12px 0 28px #0008}.game-side.collapsed{width:0!important;flex-basis:0!important}.game-side-toggle{left:-29px}.regional-layout,.sphere-layout{grid-template-columns:1fr;grid-template-rows:auto auto minmax(240px,1fr)}}

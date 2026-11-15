@@ -34,14 +34,15 @@
           <button class="map-mode active" data-map-mode="political" title="Vista territorial: una superficie por entidad política y Territorio Baldío">Territorial</button>
           <button class="map-mode" data-map-mode="regional-power">Poder regional</button>
           <button class="map-mode" data-map-mode="influence-spheres">Esferas de influencia</button>
+          <button class="map-mode" data-map-mode="concessions" title="Directorio y gestión de concesiones">Concesiones</button>
         </div>
       </div>
       <div class="toolbar-group" role="group" aria-label="Instituciones del Estado">
         <span class="toolbar-label">Estado</span>
-        <button class="state-action hidden" id="dynastyBtn">♛ Dinastía</button>
-        <button class="state-action hidden" id="governmentBtn">▥ Gobierno</button>
-        <button class="state-action hidden" id="armedForcesBtn">⚔ Fuerzas Armadas</button>
-        <button class="state-action hidden" id="societyCultureBtn">✦ Sociedad y cultura</button>
+        <button class="state-action" id="dynastyBtn">♛ Dinastía</button>
+        <button class="state-action" id="governmentBtn">▥ Gobierno</button>
+        <button class="state-action" id="armedForcesBtn">⚔ Fuerzas Armadas</button>
+        <button class="state-action" id="societyCultureBtn">✦ Sociedad y cultura</button>
       </div>
     </div>
     <div class="game-mapwrap">
@@ -50,12 +51,12 @@
       <section id="regionalPowerView" class="geopolitical-view regional-power-view" aria-label="Poder regional" hidden>
         <header class="geopolitical-heading"><div><span class="geo-eyebrow">Atlas geopolítico · competencia entre potencias</span><h2>Poder regional</h2><p>Distribución de la primacía militar, económica y diplomática en regiones que trascienden las fronteras nacionales.</p></div><span class="geo-view-mark">01 / REGIONES</span></header>
         <div class="geo-toolbar"><label for="regionalDimension">Dimensión de poder</label><select id="regionalDimension"><option value="global">Poder global</option><option value="military">Militar y estratégico</option><option value="economic">Económico y comercial</option><option value="diplomatic">Diplomático y político</option></select><span class="geo-legend"><i class="geo-dot military"></i> Militar <i class="geo-dot economic"></i> Económico <i class="geo-dot diplomatic"></i> Diplomático</span></div>
-        <div class="regional-layout"><div id="regionalAtlas" class="regional-atlas"></div><aside id="regionalDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona una región</b><span>Su importancia, reparto de poder y activos estratégicos aparecerán aquí.</span></div></aside></div>
+        <div class="regional-layout"><div id="regionalAtlas" class="regional-atlas geo-selector"></div><aside id="regionalDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona una región</b><span>Su importancia, reparto de poder, recursos y enclaves aparecerán aquí.</span></div></aside><div id="regionalMap" class="geo-map-panel"><div class="geo-map-placeholder"><span>⌖</span><b>Mapa de la región</b><small>La cartografía regional aparecerá aquí cuando el JSON incluya su geometría. Este espacio queda reservado para el mapa geográfico.</small></div></div></div>
       </section>
       <section id="influenceSpheresView" class="geopolitical-view influence-spheres-view" aria-label="Esferas de influencia" hidden>
         <header class="geopolitical-heading"><div><span class="geo-eyebrow">Atlas geopolítico · predominio indirecto</span><h2>Esferas de influencia</h2><p>Competencia entre grandes potencias por la primacía reconocida y efectiva sobre territorios que conservan su soberanía.</p></div><span class="geo-view-mark">02 / TERRITORIOS</span></header>
         <div class="geo-toolbar"><label for="sphereDisplay">Capa de influencia</label><select id="sphereDisplay"><option value="recognized">Influencia reconocida</option><option value="effective">Influencia efectiva</option></select><span class="geo-legend"><i class="geo-pattern exclusive"></i> Exclusiva <i class="geo-pattern disputed"></i> Disputada <i class="geo-pattern open"></i> Abierta</span></div>
-        <div class="sphere-layout"><div id="sphereAtlas" class="sphere-atlas"></div><aside id="sphereDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona un territorio</b><span>Se mostrarán soberanía, porcentajes de influencia, primacía y tratados.</span></div></aside></div>
+        <div class="sphere-layout"><div id="sphereAtlas" class="sphere-atlas geo-selector"></div><aside id="sphereDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona un territorio</b><span>Se mostrarán soberanía, porcentajes de influencia, primacía y tratados.</span></div></aside><div id="sphereMap" class="geo-map-panel"><div class="geo-map-placeholder"><span>◉</span><b>Mapa del territorio</b><small>La cartografía del territorio seleccionado aparecerá aquí cuando el JSON incluya su geometría.</small></div></div></div>
       </section>
 
 <div id="concessionView" aria-label="Gestión de concesiones">
@@ -137,7 +138,8 @@
       <div class="chronicle-list" id="chronicleList"></div>
     </section>
   </div>
-  <aside class="game-side">
+  <aside class="game-side" id="gameSidePanel">
+    <button id="gameSideToggle" class="game-side-toggle" type="button" aria-expanded="true" aria-controls="countryInfo" title="Ocultar panel de información"><span aria-hidden="true">›</span></button>
     <div class="sidehead" id="gameSideTitle">Información del país</div>
     <div class="game-side-content" id="countryInfo"><div class="game-empty">Cargando información…</div></div>
   </aside>
