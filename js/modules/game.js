@@ -294,6 +294,8 @@ $('nextReviewEvent').onclick=()=>{turnReviewIndex++;showNextTurnEvent()};$('fini
 function renderChronicle(){const list=$('chronicleList');list.innerHTML='';(gGame.events||[]).slice().reverse().forEach(e=>{const card=document.createElement('article');card.className='event-card';card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Abrir acontecimiento: '+(e.title||''));const text=String(e.text||'');card.innerHTML=`<div class="event-icon" aria-hidden="true">${eventIcon(e)}</div><div class="event-meta">${safe(e.date||gGame.date)} · ${safe(e.type==='history'?'HISTÓRICO':String(e.type||'TURNO').toUpperCase())}</div><b>${safe(e.title)}</b><p>${safe(text)}</p><span class="more-indicator" aria-hidden="true">+</span>`;list.appendChild(card);requestAnimationFrame(()=>{const para=card.querySelector('p');if(para&&(para.scrollHeight>para.clientHeight+1||para.scrollWidth>para.clientWidth+1||card.scrollHeight>card.clientHeight+1))card.classList.add('has-overflow')});card.addEventListener('click',()=>openEvent(e));card.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();openEvent(e)}});})}
 function saveGame(){
  if(!gGame)return;
+ gGame.schemaVersion='1.0.0';
+ if(gGame.scenario)gGame.scenario.schemaVersion='1.0.0';
  const games=readJSON(keys.games,[]),idx=games.findIndex(x=>x.id===gGame.id);
  if(idx>=0)games[idx]=gGame;else games.push(gGame);
  localStorage.setItem(keys.games,JSON.stringify(games));
