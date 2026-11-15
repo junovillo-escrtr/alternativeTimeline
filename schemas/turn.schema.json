@@ -5,7 +5,7 @@
   "properties": {
     "schemaVersion": {
       "type": "string",
-      "pattern": "^1\\.0\\.0$"
+      "pattern": "^1\\\\.\\\\d+\\\\.\\\\d+$"
     },
     "turn": {
       "type": "integer",
