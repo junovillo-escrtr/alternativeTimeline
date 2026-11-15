@@ -110,19 +110,33 @@ async function refreshGameBorders(key){
  if(gBorderKey===key&&gBorderLayer){if(!gmap.hasLayer(gBorderLayer))gBorderLayer.addTo(gmap);return}
  const token=++gBorderToken,borderStart=performance.now();
  try{
-  const records=await window.__LTA_LOAD_BORDER_DATA(),lines=[],oceans=window.__LTA_OCEAN_IDS||new Set();
+  // El cargador y su conjunto de datos se descargan solo cuando la vista política necesita fronteras.
+  if(typeof window.__LTA_LOAD_BORDER_DATA!=='function'){
+   if(!window.LTA?.loadScript)throw new Error('No está disponible el cargador común de módulos.');
+   await window.LTA.loadScript('js/core/border-data-loader.js');
+  }
+  const loadBorderData=window.__LTA_LOAD_BORDER_DATA;
+  if(typeof loadBorderData!=='function')throw new Error('border-data-loader.js no ha registrado __LTA_LOAD_BORDER_DATA.');
+  const records=await loadBorderData(),latlngs=[],oceans=window.__LTA_OCEAN_IDS||new Set();
+  let pointCount=0;
+  // El filtrado se divide en lotes para no bloquear el hilo principal con decenas de miles de fronteras.
   for(let i=0;i<records.length;i++){
    const [a,b,line]=records[i],ao=oceans.has(a),bo=oceans.has(b);
-   if(ao&&bo)continue;
-   if(ao!==bo||owner(String(a))!==owner(String(b)))lines.push(line);
+   if(!(ao&&bo)&&(ao!==bo||owner(String(a))!==owner(String(b)))){
+    latlngs.push(line.map(p=>[p[1],p[0]]));
+    pointCount+=line.length;
+   }
+   if(i>0&&i%4096===0){
+    if(token!==gBorderToken)return;
+    await new Promise(resolve=>setTimeout(resolve,0));
+   }
   }
   if(token!==gBorderToken||key!=='political|'+territorySignature())return;
   if(gBorderLayer&&gmap.hasLayer(gBorderLayer))gmap.removeLayer(gBorderLayer);
-  const latlngs=lines.map(line=>line.map(p=>[p[1],p[0]]));
   gBorderLayer=L.polyline(latlngs,{renderer:gmap.options.renderer||L.canvas({padding:0.25}),smoothFactor:0.3,interactive:false,color:'#263746',weight:1.15,opacity:.95,lineCap:'round',lineJoin:'round'});
   gBorderKey=key;
   gBorderLayer.addTo(gmap);
-  console.info('[LTA rendimiento] Fronteras políticas', {tramos:lines.length,puntos:lines.reduce((n,l)=>n+l.length,0),ms:+(performance.now()-borderStart).toFixed(1)});
+  console.info('[LTA rendimiento] Fronteras políticas',{tramos:latlngs.length,puntos:pointCount,ms:+(performance.now()-borderStart).toFixed(1)});
  }catch(err){if(token===gBorderToken){console.error('Error al construir los límites territoriales:',err);$('gameStatus').textContent='Mapa cargado, pero no se pudieron dibujar los límites: '+(err.message||'error')}}
 }
 function refreshGameMapStyles(){
@@ -318,6 +332,8 @@ $('nextReviewEvent').onclick=()=>{turnReviewIndex++;showNextTurnEvent()};$('fini
 function renderChronicle(){const list=$('chronicleList');list.innerHTML='';(gGame.events||[]).slice().reverse().forEach(e=>{const card=document.createElement('article');card.className='event-card';card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Abrir acontecimiento: '+(e.title||''));const text=String(e.text||'');card.innerHTML=`<div class="event-icon" aria-hidden="true">${eventIcon(e)}</div><div class="event-meta">${safe(e.date||gGame.date)} · ${safe(e.type==='history'?'HISTÓRICO':String(e.type||'TURNO').toUpperCase())}</div><b>${safe(e.title)}</b><p>${safe(text)}</p><span class="more-indicator" aria-hidden="true">+</span>`;list.appendChild(card);requestAnimationFrame(()=>{const para=card.querySelector('p');if(para&&(para.scrollHeight>para.clientHeight+1||para.scrollWidth>para.clientWidth+1||card.scrollHeight>card.clientHeight+1))card.classList.add('has-overflow')});card.addEventListener('click',()=>openEvent(e));card.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();openEvent(e)}});})}
 function saveGame(){
  if(!gGame)return;
+ gGame.schemaVersion='1.0.0';
+ if(gGame.scenario)gGame.scenario.schemaVersion='1.0.0';
  const games=readJSON(keys.games,[]),idx=games.findIndex(x=>x.id===gGame.id);
  if(idx>=0)games[idx]=gGame;else games.push(gGame);
  localStorage.setItem(keys.games,JSON.stringify(games));
@@ -331,7 +347,7 @@ function saveGame(){
 $('saveGameBtn').onclick=saveGame;
 $('loadGameBtn').onclick=()=>{const games=readJSON(keys.games,[]),sel=$('savedGameSelect');sel.innerHTML='<option value="">Selecciona una partida</option>';games.forEach(g=>{const o=document.createElement('option');o.value=g.id;o.textContent=g.name+' · '+g.date;sel.appendChild(o)});$('loadGameModal').classList.add('show')};
 $('closeLoadGame').onclick=$('cancelLoadGame').onclick=()=>$('loadGameModal').classList.remove('show');
-$('importGameFile').onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;try{const imported=JSON.parse(await f.text());if(!imported||!imported.scenario||!imported.player)throw new Error('El archivo no parece una partida válida.');gGame=imported;gScenario=imported.scenario;gSelected=imported.selected||imported.player;const games=readJSON(keys.games,[]);const ix=games.findIndex(x=>x.id===gGame.id);if(ix>=0)games[ix]=gGame;else games.push(gGame);localStorage.setItem(keys.games,JSON.stringify(games));$('loadGameModal').classList.remove('show');launchGame();}catch(err){alert('No se pudo importar la partida: '+err.message)}};
+$('importGameFile').onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;try{const imported=JSON.parse(await f.text());if(!imported||!imported.scenario||!imported.player)throw new Error('El archivo no parece una partida válida.');if(imported.schemaVersion&&!/^1\./.test(String(imported.schemaVersion)))throw new Error('Versión de contrato de partida no compatible: '+imported.schemaVersion);gGame=imported;gGame.schemaVersion=gGame.schemaVersion||'1.0.0';if(gGame.scenario)gGame.scenario.schemaVersion=gGame.scenario.schemaVersion||'1.0.0';gScenario=imported.scenario;gSelected=imported.selected||imported.player;const games=readJSON(keys.games,[]);const ix=games.findIndex(x=>x.id===gGame.id);if(ix>=0)games[ix]=gGame;else games.push(gGame);localStorage.setItem(keys.games,JSON.stringify(games));$('loadGameModal').classList.remove('show');launchGame();}catch(err){alert('No se pudo importar la partida: '+err.message)}};
 $('confirmLoadGame').onclick=()=>{const g=readJSON(keys.games,[]).find(x=>x.id===$('savedGameSelect').value);if(!g){alert('Selecciona una partida.');return}gGame=g;gScenario=g.scenario;gSelected=g.selected||g.player;$('loadGameModal').classList.remove('show');launchGame()};
 
 // Editor de turnos: formato de intercambio con el motor narrativo.
@@ -355,7 +371,7 @@ function applyMetricSet(target,patch,label){
 $('applyTurnBtn').onclick=()=>{
  if(!gGame){alert('No hay una partida activa.');return}
  let payload;try{payload=JSON.parse($('turnPayload').value)}catch(e){alert('El JSON no es válido: '+e.message);return}
- if(!payload||typeof payload!=='object'||Array.isArray(payload)){alert('El contenido debe ser un objeto JSON.');return}
+ if(!payload||typeof payload!=='object'||Array.isArray(payload)){alert('El contenido debe ser un objeto JSON.');return}if(payload.schemaVersion&&!/^1\./.test(String(payload.schemaVersion))){alert('Versión de contrato de turno no compatible: '+payload.schemaVersion);return}
  const draft=JSON.parse(JSON.stringify(gGame));
  try{
   const state=draft.scenario?.dates?.[draft.date];if(!state)throw new Error('No se encuentra el estado territorial de la fecha actual.');
