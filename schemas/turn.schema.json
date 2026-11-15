@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LTA Turn Payload",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.0\\.0$"
+    },
+    "turn": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "stability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "economy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "support": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "military": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "administration": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": true
+    },
+    "subjectMetrics": {
+      "type": "object"
+    },
+    "countryMetrics": {
+      "type": "object"
+    },
+    "publicEstimates": {
+      "type": "object"
+    },
+    "territorialChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "provinceId",
+          "ownerId"
+        ],
+        "properties": {
+          "provinceId": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "capitals": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "nationUpdates": {
+      "type": "object"
+    },
+    "dynasties": {
+      "type": "object"
+    },
+    "parliaments": {
+      "type": "object"
+    },
+    "governments": {
+      "type": "object"
+    },
+    "armedForces": {
+      "type": "object"
+    },
+    "societyCulture": {
+      "type": "object"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "text"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "content": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "entityCreations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "sovereign",
+              "semi",
+              "non"
+            ]
+          },
+          "overlord": {
+            "type": "string"
+          },
+          "parentEntityId": {
+            "type": "string"
+          },
+          "leader": {
+            "type": "string"
+          },
+          "government": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "flag": {
+            "type": "string"
+          },
+          "coat": {
+            "type": "string"
+          },
+          "portrait": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
