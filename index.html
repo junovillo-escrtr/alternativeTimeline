@@ -32,10 +32,8 @@
         <span class="toolbar-label">Mapa</span>
         <div class="map-modebar">
           <button class="map-mode active" data-map-mode="political" title="Vista territorial: una superficie por entidad política y Territorio Baldío">Territorial</button>
-          <button class="map-mode" data-map-mode="maritime">Influencia marítima</button>
-          <button class="map-mode" data-map-mode="trade">Rutas comerciales</button>
-          <button class="map-mode" data-map-mode="strategic">Control estratégico</button>
-          <button class="map-mode" data-map-mode="concessions">Concesiones</button>
+          <button class="map-mode" data-map-mode="regional-power">Poder regional</button>
+          <button class="map-mode" data-map-mode="influence-spheres">Esferas de influencia</button>
         </div>
       </div>
       <div class="toolbar-group" role="group" aria-label="Instituciones del Estado">
@@ -49,6 +47,16 @@
     <div class="game-mapwrap">
       <div class="map-legend"><span class="legend-dot"></span> Control territorial · <span id="mapModeCaption">Vista política</span></div>
       <div id="gameMap"></div>
+      <section id="regionalPowerView" class="geopolitical-view regional-power-view" aria-label="Poder regional" hidden>
+        <header class="geopolitical-heading"><div><span class="geo-eyebrow">Atlas geopolítico · competencia entre potencias</span><h2>Poder regional</h2><p>Distribución de la primacía militar, económica y diplomática en regiones que trascienden las fronteras nacionales.</p></div><span class="geo-view-mark">01 / REGIONES</span></header>
+        <div class="geo-toolbar"><label for="regionalDimension">Dimensión de poder</label><select id="regionalDimension"><option value="global">Poder global</option><option value="military">Militar y estratégico</option><option value="economic">Económico y comercial</option><option value="diplomatic">Diplomático y político</option></select><span class="geo-legend"><i class="geo-dot military"></i> Militar <i class="geo-dot economic"></i> Económico <i class="geo-dot diplomatic"></i> Diplomático</span></div>
+        <div class="regional-layout"><div id="regionalAtlas" class="regional-atlas"></div><aside id="regionalDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona una región</b><span>Su importancia, reparto de poder y activos estratégicos aparecerán aquí.</span></div></aside></div>
+      </section>
+      <section id="influenceSpheresView" class="geopolitical-view influence-spheres-view" aria-label="Esferas de influencia" hidden>
+        <header class="geopolitical-heading"><div><span class="geo-eyebrow">Atlas geopolítico · predominio indirecto</span><h2>Esferas de influencia</h2><p>Competencia entre grandes potencias por la primacía reconocida y efectiva sobre territorios que conservan su soberanía.</p></div><span class="geo-view-mark">02 / TERRITORIOS</span></header>
+        <div class="geo-toolbar"><label for="sphereDisplay">Capa de influencia</label><select id="sphereDisplay"><option value="recognized">Influencia reconocida</option><option value="effective">Influencia efectiva</option></select><span class="geo-legend"><i class="geo-pattern exclusive"></i> Exclusiva <i class="geo-pattern disputed"></i> Disputada <i class="geo-pattern open"></i> Abierta</span></div>
+        <div class="sphere-layout"><div id="sphereAtlas" class="sphere-atlas"></div><aside id="sphereDetail" class="geo-detail"><div class="geo-empty"><b>Selecciona un territorio</b><span>Se mostrarán soberanía, porcentajes de influencia, primacía y tratados.</span></div></aside></div>
+      </section>
 
 <div id="concessionView" aria-label="Gestión de concesiones">
  <div class="cv-shell">
