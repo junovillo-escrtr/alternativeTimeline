@@ -2,6 +2,7 @@
 self.onmessage=async()=>{
  try{
   if(!('DecompressionStream' in self))throw new Error('DecompressionStream no disponible en el trabajador.');
+  self.window=self;
   importScripts('../../data/earth3-topology.js');
   const totalStart=performance.now(),encoded=self.__LTA_EARTH3_TOPOJSON_GZIP_BASE64;
   if(!encoded)throw new Error('No se han encontrado los datos TopoJSON integrados.');
