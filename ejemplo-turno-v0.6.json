@@ -1,0 +1,50 @@
+{
+  "turn": 1,
+  "date": "1842-06-14",
+  "events": [
+    {
+      "date": "1842-06-14",
+      "title": "Acuerdo comercial con el Reino de Valdoria",
+      "text": "Los representantes imperiales han alcanzado un acuerdo preliminar con el Reino de Valdoria para reducir los aranceles sobre determinados productos manufacturados. El tratado pretende estimular el comercio bilateral y facilitar la entrada de materias primas. Las negociaciones continuarán durante las próximas semanas para concretar los productos incluidos, los plazos de aplicación y los mecanismos de supervisión aduanera.",
+      "type": "turn",
+      "category": "diplomacy",
+      "icon": "🤝",
+      "content": [
+        {
+          "type": "text",
+          "text": "Los representantes imperiales han alcanzado un acuerdo preliminar con el Reino de Valdoria para reducir los aranceles sobre determinados productos manufacturados. El tratado pretende estimular el comercio bilateral y facilitar la entrada de materias primas."
+        },
+        {
+          "type": "heading",
+          "text": "Principales disposiciones"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Reducción gradual de los aranceles sobre manufacturas seleccionadas.",
+            "Facilidades para la importación de materias primas.",
+            "Creación de una comisión bilateral para resolver disputas comerciales."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Las negociaciones continuarán durante las próximas semanas para concretar los productos incluidos, los plazos de aplicación y los mecanismos de supervisión aduanera."
+        }
+      ]
+    },
+    {
+      "date": "1842-06-14",
+      "title": "Ampliación de los talleres estatales",
+      "text": "Comienzan las obras para ampliar la capacidad de producción de maquinaria y suministros.",
+      "type": "turn",
+      "category": "industry"
+    },
+    {
+      "date": "1842-06-14",
+      "title": "Un nuevo periódico en la capital",
+      "text": "Aparece una nueva publicación dedicada a los asuntos públicos.",
+      "type": "turn",
+      "category": "society"
+    }
+  ]
+}

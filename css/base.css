@@ -1,0 +1,192 @@
+
+:root{--bg:#1a1a1c;--panel:#222225;--panel2:#2b2b2f;--line:#39393d;--text:#e8e5df;--muted:#a3a3aa;--accent:#c5a46d;--red:#e17878}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 Inter,system-ui,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:7px;background:var(--panel2);color:var(--text);padding:9px 12px}button:hover{border-color:var(--accent)}button.primary{background:#8a642e;border-color:#b78b4a;color:#fff}button:disabled{opacity:.35;cursor:not-allowed}input,select,textarea{width:100%;background:#101820;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:9px}label{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}.app{height:100vh;display:flex;flex-direction:column}.top{height:58px;display:flex;align-items:center;gap:16px;padding:0 18px;border-bottom:1px solid var(--line);background:#151e27}.brand{font-weight:700;letter-spacing:.3px}.brand span{color:var(--accent)}.top small{color:var(--muted)}.screen{display:none;flex:1;min-height:0}.screen.active{display:flex}.home{align-items:center;justify-content:center;flex-direction:column;gap:14px}.home h1{font-size:30px;margin:0 0 10px}.home p{color:var(--muted);margin:0 0 20px}.home button{width:260px;padding:14px}.editor{min-height:0;flex:1}.mapwrap{position:relative;flex:1;min-width:0;background:radial-gradient(ellipse at 48% 45%,#244b65 0%,#18384f 62%,#102b40 100%)}#map{height:100%;width:100%;background:transparent}.side{width:340px;max-width:42vw;background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}.sidehead{padding:14px 15px;border-bottom:1px solid var(--line);font-weight:700}.sidebody{padding:14px;overflow:auto;flex:1}.section{padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line)}.section:last-child{border:0}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}.hint{color:var(--muted);font-size:12px;margin-top:7px}.datebar{display:flex;gap:7px}.datebar select{flex:1}.nation-list{display:flex;flex-direction:column;gap:6px;max-height:240px;overflow:auto;margin-top:10px}.nation{display:flex;gap:8px;align-items:center;text-align:left;width:100%;padding:8px}.nation.selected{border-color:var(--accent);background:#293442}.swatch{width:17px;height:17px;border-radius:4px;border:1px solid #ffffff66;flex:none}.nation .nname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nation small{color:var(--muted)}.status{padding:9px 12px;background:#121a22;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between}.maptools{position:absolute;z-index:500;top:12px;left:12px;background:#18232ddd;color:white;padding:9px 11px;border:1px solid #506070;border-radius:7px;max-width:340px;pointer-events:none;font-size:12px}.leaflet-tooltip{font-weight:600}.leaflet-container{font:inherit;background:transparent}#map.leaflet-container,#gameMap.leaflet-container{background:transparent}.modalback{display:none;position:fixed;inset:0;z-index:2000;background:#0009;align-items:center;justify-content:center;padding:15px}.modalback.show{display:flex}.modal{width:min(540px,100%);max-height:92vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 70px #0009}.modalhead{padding:15px 18px;border-bottom:1px solid var(--line);font-weight:700;display:flex;justify-content:space-between}.modalbody{padding:16px 18px}.modalfoot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.hidden{display:none!important}.pill{font-size:11px;border:1px solid var(--line);padding:2px 6px;border-radius:99px;color:var(--muted)}.filebtn{display:inline-block;padding:8px 10px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;cursor:pointer}.filebtn input{display:none}.empty{color:var(--muted);padding:12px;text-align:center;border:1px dashed var(--line);border-radius:7px}.danger{color:#ffaaaa}.maploading{position:absolute;z-index:600;inset:0;display:flex;align-items:center;justify-content:center;background:#18384f;color:#e8edf2;font-weight:600}.leaflet-interactive{transition:fill .1s}
+@media(max-width:800px){.side{width:300px}.top small{display:none}}@media(max-width:620px){.editor{flex-direction:column}.mapwrap{min-height:48vh}.side{width:100%;max-width:none;max-height:52vh}.sidebody{padding:10px}.sidehead{padding:10px}}
+
+/* v0.4: indicadores por rangos y editor de turnos */
+.meter span.metric-low{background:#d9534f}
+.meter span.metric-midlow{background:#e88932}
+.meter span.metric-midhigh{background:#e3c342}
+.meter span.metric-high{background:#45a85a}
+.meter span.metric-excellent{background:#176b38}
+.subject-line{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.subject-line .country-flag{width:24px;height:17px;object-fit:contain;display:inline-block;vertical-align:middle;flex:0 0 auto}
+.turn-editor{width:min(900px,96vw)}
+.turn-editor textarea{width:100%;min-height:330px;resize:vertical;background:#101820;color:#e8edf2;border:1px solid #405366;border-radius:8px;padding:13px;font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+.turn-help{font-size:12px;color:#aab7c4;margin:8px 0 12px}
+
+/* v0.7 — diseño editorial, instituciones y hemiciclo compacto */
+.dynasty-name,.dynasty-person-name,.parliament-title,.party-name,.event-modal-title{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.02em}
+.dynasty-name{font-size:30px;font-weight:600;font-style:italic;color:#ead8b7;margin:0}
+.dynasty-layout{grid-template-columns:minmax(250px,.78fr) minmax(0,1.5fr);gap:24px;align-items:start}
+.dynasty-head{padding:14px;background:linear-gradient(145deg,#29251f,#1b1a19);border:7px ridge #8d754f;outline:1px solid #c5a46d;box-shadow:0 5px 18px #0008,inset 0 0 0 2px #d4b77c55;border-radius:3px;text-align:center}
+.dynasty-head img{width:100%;height:390px;object-fit:cover;object-position:top;border:4px double #b99a68;border-radius:1px}
+.dynasty-crest{max-width:70px;max-height:78px;object-fit:contain;float:right;margin-left:16px}
+.dynasty-right-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #766344;margin-bottom:16px;background:linear-gradient(90deg,#28241e,#1d1c1a)}
+.dynasty-person-name{font-size:24px;font-weight:600;color:#f0dfbd;margin:10px 0 3px}
+.dynasty-titles{font-family:'Libre Baskerville',Georgia,serif;font-size:11px;line-height:1.6;color:#c8bda9}
+.dynasty-title-toggle{margin-top:8px;font-size:11px;padding:5px 8px}
+.dynasty-member{position:relative;padding:9px;background:#222225;border:5px ridge #776344;border-radius:2px;box-shadow:0 4px 12px #0007;text-align:center;cursor:help}
+.dynasty-member img{width:100%;height:160px;object-fit:cover;object-position:top;border:3px double #b99a68;border-radius:1px;margin-bottom:8px}
+.dynasty-member:hover{border-color:#c5a46d;background:#302b23}
+.dynasty-member .member-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600;color:#ead8b7}
+.dynasty-member[data-tooltip]:hover:after{content:attr(data-tooltip);position:absolute;z-index:20;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:min(260px,75vw);padding:10px 12px;background:#111113;border:1px solid #b99a68;border-radius:6px;color:#eee;text-align:left;font:12px/1.5 Inter,system-ui;box-shadow:0 8px 24px #000b;white-space:pre-line;pointer-events:none}
+.event-card{position:relative;padding-bottom:25px}
+.event-card .more-indicator{display:none;position:absolute;right:7px;bottom:7px;width:22px;height:22px;align-items:center;justify-content:center;background:#55555c;border:1px solid #888891;border-radius:4px;color:#fff;font-size:17px;font-weight:700;line-height:1;box-shadow:0 1px 5px #0008}
+.event-card.has-overflow .more-indicator{display:flex}
+.event-card.has-overflow:after{content:'';position:absolute;right:0;bottom:0;width:44px;height:34px;background:linear-gradient(90deg,transparent,#222225 45%);pointer-events:none}
+.event-card.has-overflow .more-indicator{z-index:2}
+.event-content .event-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:center;margin:16px 0;padding:12px;background:#202024;border:1px solid #39393d;border-radius:8px}
+.event-content .event-split figure{margin:0}
+.event-content .event-split img{width:100%;height:240px;object-fit:cover;margin:0}
+.event-content .event-split-text>*:last-child{margin-bottom:0}
+.event-content .event-split.image-right figure{order:2}
+.event-content .event-split.image-right .event-split-text{order:1}
+.event-review-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;border-top:1px solid #39393d;background:#171719}
+.event-review-foot .review-count{font-size:12px;color:#aaa}
+.parliament-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:18px;align-items:start}
+.parliament-left,.parliament-right{min-width:0}
+.parliament-title{font-size:25px;color:#ead8b7;font-style:italic;margin:4px 0 12px}
+.hemicycle-wrap{padding:14px;background:linear-gradient(160deg,#262528,#1d1c1e);border:1px solid #66563e}
+.hemicycle{max-height:480px}
+.party-leader-feature{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px;margin-bottom:14px;background:linear-gradient(145deg,#2b2823,#1e1d1b);border:6px ridge #8d754f;box-shadow:0 5px 16px #0007}
+.party-leader-feature img{width:126px;height:150px;object-fit:cover;object-position:top;border:4px double #b99a68}
+.party-leader-feature .feature-name{font:600 25px 'Cormorant Garamond',Georgia,serif;color:#efdbb6;margin-top:7px}
+.party-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.party-item{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:9px;padding:9px;background:#222225;border:5px ridge #776344;border-radius:2px;min-width:0}
+.party-item img{width:68px;height:82px;object-fit:cover;object-position:top;border:3px double #b99a68;border-radius:0}
+.party-item .party-name{font-size:19px;color:#ead8b7;font-weight:600}
+.party-swatch{width:12px;height:12px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:middle}
+.party-description{font-size:11px;line-height:1.45;color:#bcb6aa;margin-top:4px}
+@media(max-width:760px){.dynasty-layout,.parliament-layout{grid-template-columns:1fr}.dynasty-head img{height:280px}.event-content .event-split{grid-template-columns:1fr}.event-content .event-split.image-right figure{order:0}.event-content .event-split.image-right .event-split-text{order:0}.party-grid{grid-template-columns:1fr}}
+
+/* v0.7.1 — lenguaje visual institucional depurado */
+.dynasty-head{border:0;outline:0;box-shadow:none;border-radius:10px;background:#202024;padding:12px;text-align:center}
+.dynasty-head img{border:0;border-radius:7px;height:390px;object-fit:cover;box-shadow:0 5px 18px #0005}
+.dynasty-right-head{background:transparent;border-bottom:1px solid #45454a;padding:8px 2px 12px}
+.dynasty-crest{max-width:58px;max-height:64px}
+.dynasty-member{display:flex;align-items:center;gap:11px;text-align:left;padding:7px 9px;background:#222225;border:1px solid #414146;border-radius:8px;box-shadow:none;min-height:86px;cursor:help}
+.dynasty-members{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:8px}
+.dynasty-member img,.dynasty-member .member-placeholder{width:58px;height:70px;flex:0 0 58px;object-fit:cover;object-position:top;border:0;border-radius:5px;margin:0;background:#303036}
+.dynasty-member .member-placeholder{display:flex;align-items:center;justify-content:center}
+.dynasty-member .member-info{min-width:0}
+.dynasty-member .member-name{font-size:17px;line-height:1.15;margin-bottom:3px}
+.dynasty-member .dynasty-titles{font-size:10px;line-height:1.4}
+.dynasty-member:hover{border-color:#77716a;background:#29292e}
+.dynasty-member[data-tooltip]:hover:after{border:1px solid #55565b;border-radius:7px}
+.parliament-layout{grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:22px}
+.hemicycle-wrap{padding:8px 12px 2px;background:#202024;border:1px solid #414146;border-radius:10px;overflow:hidden}
+.hemicycle{display:block;width:100%;max-height:none;min-width:0}
+.party-leader-feature{background:#222225;border:1px solid #414146;border-radius:9px;box-shadow:none;padding:12px;position:relative;overflow:hidden}
+.party-leader-feature:before{content:'';position:absolute;inset:0 0 auto;height:4px;background:var(--party-color,#777)}
+.party-leader-feature img{width:112px;height:132px;object-fit:cover;object-position:top;border:0;border-radius:5px}
+.party-leader-feature .feature-name{font-size:23px;margin-top:8px}
+.feature-affiliation{display:flex;align-items:center;gap:6px;font-size:11px;color:#d0c9bd;margin-top:4px}
+.feature-affiliation .party-swatch{width:10px;height:10px;border-radius:2px;margin:0}
+.party-grid{display:flex;flex-direction:column;gap:7px}
+.party-item{display:flex;align-items:center;gap:10px;padding:7px 9px;background:#222225;border:1px solid #414146;border-radius:8px;min-height:78px;box-shadow:none}
+.party-item img,.party-item .leader-placeholder{width:54px;height:64px;flex:0 0 54px;object-fit:cover;object-position:top;border:0;border-radius:5px;background:#303036}
+.party-item .party-name{font-size:17px;line-height:1.15}
+.party-item .party-swatch{width:11px;height:11px;border-radius:2px;margin-right:5px}
+.party-item .hint{font-size:10px}
+.party-description{font-size:10px;line-height:1.4;color:#bcb6aa;margin-top:3px}
+@media(max-width:760px){.dynasty-layout,.parliament-layout{grid-template-columns:1fr}.dynasty-head img{height:290px}.dynasty-members{grid-template-columns:1fr}.party-item{min-height:72px}}
+
+
+/* v0.7.2 — fichas sobrias y escaños individuales */
+.dynasty-head{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;padding:0!important}
+.dynasty-head img{border:0!important;outline:0!important;box-shadow:none!important;border-radius:7px!important}
+.dynasty-right-head{background:transparent!important;border-bottom:1px solid #39393d!important}
+.dynasty-members{display:flex!important;flex-direction:column!important;gap:8px!important}
+.dynasty-member{width:100%;min-height:76px!important;border:1px solid #39393d!important;box-shadow:none!important;background:#202024!important;border-radius:8px!important}
+.dynasty-member img,.dynasty-member .member-placeholder{width:52px!important;height:62px!important;flex:0 0 52px!important;border:0!important;border-radius:5px!important;margin:0!important}
+.dynasty-member:hover{border-color:#66666d!important;background:#252528!important}
+.party-leader-feature{border:1px solid #39393d!important;box-shadow:none!important;background:#202024!important;border-radius:9px!important}
+.party-leader-feature:before{height:3px!important}
+.party-leader-feature img{border:0!important;box-shadow:none!important}
+.party-item{width:100%;border:1px solid #39393d!important;box-shadow:none!important}
+.party-item:hover{border-color:#66666d!important}
+.hemicycle-wrap{background:#202024!important;border:1px solid #39393d!important;border-radius:10px!important;padding:10px!important}
+.hemicycle{width:100%;height:auto;display:block;max-height:none!important}
+@media(max-width:760px){.dynasty-members{display:flex!important;flex-direction:column!important}.dynasty-member{width:100%!important}.parliament-layout{grid-template-columns:1fr!important}}
+
+/* v0.7.3 — ranking global, disposición parlamentaria y panel militar */
+.top-home{margin-left:8px;padding:6px 10px;font-size:12px}
+.global-rank{margin-left:auto;display:flex;align-items:center;gap:10px;padding:5px 10px;border:1px solid #414146;border-radius:9px;background:#202024;min-width:210px}
+.global-rank img{width:34px;height:24px;object-fit:cover;border-radius:3px;background:#343438;border:1px solid #ffffff30}
+.rank-country{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.2}.rank-country b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rank-country small{font-size:10px;color:#aaa}
+.global-rank strong{font-size:19px;white-space:nowrap;color:#e8d4ad;font-variant-numeric:tabular-nums}
+.parliament-top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:stretch}
+.parliament-right{display:contents}
+.party-roster{grid-column:1/-1;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.party-item{display:flex;align-items:center;gap:12px;text-align:left;min-height:76px;padding:8px 11px;background:#202024;border:1px solid #39393d;border-left:3px solid var(--party-color,#777);border-radius:8px}
+.party-item img,.party-item .leader-placeholder{width:52px!important;height:62px!important;flex:0 0 52px;object-fit:cover;object-position:top;border-radius:5px;background:#303036}
+.party-item .party-info{min-width:0;flex:1}.party-item .party-name{font-size:18px}.party-item .party-description{margin-top:3px}
+.party-leader-feature{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;border:1px solid #39393d;border-top:3px solid var(--party-color);border-radius:9px;background:#202024;min-width:0}
+.party-leader-feature img{width:112px;height:138px;object-fit:cover;object-position:top;border-radius:6px;background:#303036}
+.party-leader-feature .feature-affiliation{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;color:#c9c4ba;font-size:12px}
+.dynasty-members{display:flex!important;flex-direction:column!important;gap:8px!important}
+.dynasty-member{display:flex!important;align-items:center;gap:12px;text-align:left!important;min-height:76px;padding:7px 10px!important;border:1px solid #39393d!important;background:#202024!important;box-shadow:none!important;border-radius:8px!important}
+.dynasty-member img,.dynasty-member .member-placeholder{width:52px!important;height:62px!important;flex:0 0 52px!important;object-fit:cover;margin:0!important;border:0!important;border-radius:5px!important}
+.dynasty-member .member-info{min-width:0}.dynasty-member .member-name{font-size:18px!important}
+.dynasty-head{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;padding:0!important}
+.dynasty-head img{border:0!important;box-shadow:none!important;border-radius:7px!important}
+.forces-modal{width:min(1120px,97vw)}.force-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:14px}
+.force-stat{padding:10px 12px;background:#202024;border:1px solid #39393d;border-radius:8px}.force-stat small{display:block;color:#aaa;font-size:11px}.force-stat b{display:block;font-size:22px;margin-top:2px;font-variant-numeric:tabular-nums}
+.force-branch-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 16px}.force-branch-tabs button.active{background:#3b3326;border-color:#92764b;color:#f3dfba}
+.force-branch-overview{display:grid;grid-template-columns:minmax(180px,.7fr) minmax(0,1.3fr);gap:18px;padding:14px;background:#202024;border:1px solid #39393d;border-radius:9px;margin-bottom:16px}
+.force-grade{display:flex;flex-direction:column;justify-content:center;align-items:center;border-right:1px solid #414146;padding:8px 14px}.force-grade strong{font-size:42px;line-height:1;color:#e8d4ad;font-variant-numeric:tabular-nums}.force-grade small{color:#aaa;margin-top:5px}
+.force-bars{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px}.force-bar-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}.force-bar{height:7px;background:#3a3a40;border-radius:10px;overflow:hidden}.force-bar span{display:block;height:100%;background:#8c9b75;border-radius:10px}
+.force-formation{border:1px solid #39393d;border-radius:9px;margin:9px 0;background:#1e1e21;overflow:hidden}.force-formation summary{cursor:pointer;list-style:none;padding:12px 14px;display:flex;align-items:center;gap:12px}.force-formation summary::-webkit-details-marker{display:none}.formation-main{flex:1;min-width:0}.formation-main b{display:block}.formation-main small{color:#aaa}.formation-count{font-size:18px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}.formation-detail{padding:0 14px 14px;border-top:1px solid #39393d}.composition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin:12px 0}.composition-item{padding:8px;background:#29292d;border-radius:6px}.composition-item small{display:block;color:#aaa;font-size:10px}.composition-item b{font-size:15px}.formation-meta{display:flex;flex-wrap:wrap;gap:12px;color:#bbb;font-size:12px;margin:9px 0}.formation-bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:7px 12px;margin:10px 0}.force-empty{padding:16px;border:1px dashed #45454a;border-radius:8px;color:#aaa;text-align:center}
+@media(max-width:760px){.global-rank{min-width:0;padding:4px 6px;gap:6px}.rank-country{display:none}.global-rank strong{font-size:16px}.parliament-top{grid-template-columns:1fr}.force-summary{grid-template-columns:1fr 1fr}.force-branch-overview{grid-template-columns:1fr}.force-grade{border-right:0;border-bottom:1px solid #414146}.force-bars{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.force-summary{grid-template-columns:1fr}.force-bars{grid-template-columns:1fr}.global-rank img{width:27px;height:19px}}
+
+
+/* v0.8 — Sociedad y cultura */
+.society-modal{width:min(1180px,97vw)}
+.society-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin-bottom:16px}
+.society-metric{padding:11px 12px;background:#202024;border:1px solid #39393d;border-radius:8px}
+.society-metric small{display:block;color:#aaa;font-size:11px}.society-metric b{font-size:22px;display:block;margin:3px 0 7px;font-variant-numeric:tabular-nums}
+.society-meter{height:6px;border-radius:9px;background:#3a3a40;overflow:hidden}.society-meter span{display:block;height:100%;background:#8d9e7b;border-radius:9px}
+.society-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 17px}.society-tabs button.active{background:#343b3c;border-color:#84917e;color:#f1f0e8}
+.society-section-title{font:italic 25px Georgia,serif;color:#e8d8bd;margin:8px 0 4px}.society-section-desc{color:#aeb5bb;margin:0 0 14px;font-size:12px}
+.society-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.society-card{position:relative;height:155px;overflow:hidden;border:1px solid #45454a;border-radius:9px;padding:0;text-align:left;background:#25252a;isolation:isolate}
+.society-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .25s}.society-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#08090bef 0%,#08090b88 48%,#08090b10 100%);z-index:1}.society-card-copy{z-index:2}.society-card:hover img{transform:scale(1.045)}
+.society-card-copy{position:absolute;left:13px;right:13px;bottom:12px}.society-card-copy small{display:block;color:#d2c7b6;font-size:10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}.society-card-copy b{font:600 21px/1.08 Georgia,serif;color:#fff;text-shadow:0 2px 8px #000}
+.society-empty{padding:20px;border:1px dashed #45454a;border-radius:8px;color:#aaa;text-align:center}
+.society-detail{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:22px;align-items:start}.society-detail-image{width:100%;height:480px;object-fit:cover;border-radius:9px;background:#29292d;border:1px solid #444}
+.society-back{margin-bottom:14px}.society-detail-type{color:#c7b99f;text-transform:uppercase;letter-spacing:.1em;font-size:10px}.society-detail-title{font:italic 34px/1.05 Georgia,serif;margin:5px 0 10px;color:#eadcc4}.society-detail-lead{color:#c1c5c9;font-size:13px;margin:0 0 15px}.society-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 16px}.society-fact{padding:9px;background:#202024;border:1px solid #39393d;border-radius:7px}.society-fact small{display:block;color:#999;font-size:10px}.society-fact b{font-size:12px}.society-detail h3{font-size:14px;margin:17px 0 7px}.society-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}.society-bar-row small{display:flex;justify-content:space-between;color:#b9bdc1;font-size:11px;margin-bottom:4px}.society-history{border-left:2px solid #51534f;margin:8px 0 0 5px;padding-left:14px}.society-history-item{position:relative;margin:0 0 12px;color:#c3c6c8;font-size:12px}.society-history-item:before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#a99a7c;left:-19px;top:5px}.society-history-item b{color:#e2d6c2;margin-right:7px}
+@media(max-width:760px){.society-detail{grid-template-columns:1fr}.society-detail-image{height:270px}.society-bars{grid-template-columns:1fr}.society-detail-title{font-size:28px}}
+
+
+/* v0.9.0: responsive institutional views and reliable map resizing */
+#gameScreen,.game-main{min-height:0;height:100%;}
+.game-main{overflow:hidden}
+.game-mapwrap{flex:1 1 0;height:auto;min-height:120px;overflow:hidden}
+#gameMap{position:absolute;inset:0;width:100%;height:100%;min-height:0;background:#171719}
+.chronicle{flex:0 0 218px;min-height:48px}
+.chronicle.collapsed{flex-basis:48px}
+.institution-modal .modalbody{overflow:auto;min-height:0}
+.gov-tabs{display:flex;gap:8px;border-bottom:1px solid #424248;margin-bottom:15px;position:sticky;top:-14px;padding:4px 0 10px;background:#1c1c1f;z-index:5}
+.gov-tab{padding:8px 18px}.gov-tab.active{background:#3b3326;border-color:#a88a5b;color:#f0dfbd}
+.parliament-top{grid-template-columns:minmax(0,3fr) minmax(210px,1fr)!important;gap:18px}
+.party-hover{position:relative;cursor:help}
+.party-hover[data-tooltip]:hover:after,.minister-person[data-tooltip]:hover:after,.dynasty-node[data-tooltip]:hover:after{display:none!important;content:attr(data-tooltip);white-space:pre-line;position:absolute;z-index:50;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:min(300px,75vw);padding:10px 12px;background:#101012;border:1px solid #9b825b;border-radius:7px;color:#eee;font:12px/1.5 Inter,system-ui;box-shadow:0 8px 24px #000b;pointer-events:none}
+.executive-tree{min-width:0;text-align:center;padding:12px 4px 24px}.executive-leader{display:inline-flex;align-items:center;gap:14px;text-align:left;padding:12px 18px;border:1px solid #8a714c;border-radius:10px;background:linear-gradient(145deg,#30291f,#202024);min-width:260px;max-width:100%}.executive-leader img,.executive-avatar{width:82px;height:96px;object-fit:cover;border-radius:6px;background:#353238}.executive-avatar,.minister-avatar{display:flex;align-items:center;justify-content:center;font-size:42px;color:#c5a46d}.executive-leader small{font-size:10px;letter-spacing:.12em;color:#c5a46d}.executive-leader h2{margin:4px 0;font:600 24px Georgia,serif;color:#ead8b7}.executive-leader p{margin:0;color:#aaa;font-size:12px}.executive-connector{height:28px;width:1px;background:#8a714c;margin:auto}.minister-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;align-items:start}.minister-card{position:relative;background:#222225;border:1px solid #414146;border-radius:9px;padding:10px;min-width:0}.minister-person{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:help}.minister-person img,.minister-avatar{width:88px;height:105px;object-fit:cover;border-radius:6px;background:#333}.minister-person b{font:600 17px Georgia,serif;color:#ead8b7}.minister-person small{font-size:11px;color:#aaa}.ministry-link{width:100%;margin-top:10px;color:#e3c995;border-color:#786342}.minister-bonus{font-size:11px;color:#9fc69d;margin-top:8px}.ministry-popover{position:fixed;inset:0;z-index:1000;background:#0009;display:flex;align-items:center;justify-content:center;padding:20px}.ministry-dialog{position:relative;width:min(480px,95vw);padding:24px;background:#222225;border:1px solid #92764b;border-radius:12px;box-shadow:0 20px 60px #000b;text-align:left}.ministry-dialog h2{font:600 26px Georgia,serif;color:#ead8b7;margin:0 35px 12px 0}.ministry-dialog p{white-space:pre-wrap;line-height:1.6;color:#ddd}.ministry-close{position:absolute;right:12px;top:12px}
+.dynasty-shell{min-height:450px}.dynasty-topline{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #444;padding-bottom:12px;margin-bottom:14px}.dynasty-workspace{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px;min-height:360px}.dynasty-canvas-wrap{overflow:auto;min-width:0;max-height:65vh;border:1px solid #414146;border-radius:9px;background:radial-gradient(circle at 50% 0%,#2a2928,#19191b 72%);cursor:grab;touch-action:pan-x pan-y}.dynasty-canvas-wrap:active{cursor:grabbing}.dynasty-canvas{display:flex;gap:22px;align-items:flex-start;padding:22px;min-width:max-content;min-height:100%}.dynasty-branch{width:260px;text-align:center;background:#202024;border:1px solid #4a4640;border-radius:10px;padding:12px}.dynasty-branch>header{font:600 18px Georgia,serif;color:#e5d2ad;padding-bottom:10px;border-bottom:1px solid #4a4640}.dynasty-node{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;margin:12px auto;padding:9px;width:180px;min-height:150px;background:#29282a;border:1px solid #61533e;border-radius:8px;cursor:help}.dynasty-node img,.dynasty-avatar{width:78px;height:88px;object-fit:cover;border-radius:5px;background:#353238}.dynasty-avatar{display:flex;align-items:center;justify-content:center;font-size:38px;color:#c5a46d}.dynasty-node b{font:600 15px Georgia,serif;color:#ead8b7}.dynasty-node small{font-size:10px;color:#bdb5a8}.dynasty-node em{font-size:10px;color:#9fc69d}.dynasty-connect{height:18px;width:1px;background:#9b825b;margin:auto}.dynasty-descendants{display:grid;grid-template-columns:1fr;gap:2px}.dynasty-branch-list{border-left:1px solid #414146;padding-left:14px}.dynasty-branch-list h3{margin:4px 0 12px}.dynasty-branch-leader{padding:10px;margin-bottom:8px;background:#222225;border:1px solid #414146;border-radius:8px;display:flex;flex-direction:column;gap:4px}.dynasty-branch-leader b{color:#ead8b7}.dynasty-branch-leader span{font-size:13px}.dynasty-branch-leader small{color:#aaa;font-size:11px}
+@media(max-width:760px){.parliament-top{grid-template-columns:1fr!important}.dynasty-workspace{grid-template-columns:1fr}.dynasty-branch-list{border-left:0;border-top:1px solid #414146;padding:12px 0}.dynasty-canvas-wrap{max-height:50vh}.minister-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){#gameScreen.active{overflow:hidden}.game-main{flex:1 1 auto;height:100%;min-height:0}.game-mapwrap{height:auto;min-height:100px;flex:1 1 0}.chronicle{flex:0 0 190px}.chronicle.collapsed{flex-basis:48px}.game-side{display:none}}
+
+
+/* v0.9.5 — sistema de entidades políticas por órdenes JSON y tema común */
+:root{--game-bg:#1a1a1c;--game-panel:#222225;--game-line:#39393d;--game-gold:#c5a46d}
+button,.nation,.info-cell,.knowledge{transition:border-color .16s,background-color .16s,transform .16s}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--game-gold);outline-offset:2px}
+.admin-list{display:flex;flex-direction:column;gap:7px;margin-top:14px;max-height:280px;overflow:auto}
+.admin-item{display:flex;align-items:center;gap:9px;padding:9px;background:#222225;border:1px solid #414146;border-radius:8px}
+.admin-item.active{border-color:#c5a46d;background:#302b23}
+.admin-item .swatch{width:14px;height:14px}.admin-item .admin-copy{flex:1;min-width:0}.admin-item small{display:block;color:#a3a3aa;font-size:11px}
+.chronicle-toggle{width:28px;height:28px;flex:0 0 28px;display:inline-flex;align-items:center;justify-content:center;padding:4px;border:1px solid #66563c;border-radius:6px;background:#29251f;color:#e8d4ad}
+.chronicle-toggle svg{display:block;width:16px;height:16px;transition:transform .2s ease}
+.chronicle.collapsed .chronicle-toggle svg{transform:rotate(-90deg)}
+.chronicle-toggle:hover{background:#3b3326;border-color:#c5a46d}

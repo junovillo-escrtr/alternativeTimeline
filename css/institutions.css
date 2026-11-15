@@ -1,0 +1,36 @@
+
+/* v0.9.1 — árbol genealógico, tooltips y alineación ejecutiva */
+.dynasty-canvas-wrap{overflow:hidden!important;max-height:68vh;min-height:430px;position:relative;touch-action:none;cursor:grab;scrollbar-width:none!important;-ms-overflow-style:none!important}
+.dynasty-canvas-wrap::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+.dynasty-canvas{display:flex;gap:18px;align-items:stretch;padding:18px;min-width:max-content;transform-origin:0 0;will-change:transform}
+.dynasty-branch{width: min-content;min-width:420px;max-width:none;padding:14px;position:relative;border:1px solid var(--branch-border,#8c7958);background:var(--branch-bg,#28251f);}
+.dynasty-branch>header{display:flex;align-items:center;justify-content:center;min-height:40px;color:#f2e8d6;border:0;padding:0 12px 10px}
+.dynasty-branch-crest{position:absolute;top:10px;left:10px;width:54px;height:64px;object-fit:contain;z-index:2;filter:drop-shadow(0 2px 3px #0009)}
+.dynasty-family{display:flex;flex-direction:column;align-items:center;min-width:390px;padding:8px 4px 16px}
+.dynasty-couple{display:flex;align-items:center;justify-content:center;gap:0;position:relative}
+.dynasty-couple-link{width:34px;height:2px;background:#d7c49e;flex:0 0 34px}
+.dynasty-person-node{width:92px;height:104px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid #c9b58b;background:#17191d;border-radius:7px;cursor:help;overflow:visible}
+.dynasty-person-node img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:6px}
+.dynasty-person-node .dynasty-avatar{width:100%;height:100%;border-radius:6px}
+.dynasty-person-node b,.dynasty-person-node small,.dynasty-node b,.dynasty-node small{display:none!important}
+.dynasty-person-node[data-tooltip]:hover:after{display:none!important;content:attr(data-tooltip);position:fixed;z-index:5000;left:var(--tip-x,50%);top:var(--tip-y,50%);transform:none;width:min(300px,80vw);padding:10px 12px;background:#101012;border:1px solid #b99a68;border-radius:7px;color:#eee;text-align:left;font:12px/1.5 Inter,system-ui;white-space:pre-line;pointer-events:none;box-shadow:0 8px 24px #000c}
+.dynasty-children{display:flex;justify-content:center;gap:18px;position:relative;padding-top:34px;margin-top:12px;border-top:2px solid #c9b58b}
+.dynasty-child-family{display:flex;flex-direction:column;align-items:center;position:relative;padding:0 5px;min-width:120px}
+.dynasty-child-family:before{content:'';position:absolute;top:-35px;height:35px;width:2px;background:#c9b58b}
+.dynasty-child-family .dynasty-couple{gap:0}
+.dynasty-child-family .dynasty-person-node{width:76px;height:88px}
+.dynasty-child-family .dynasty-children{margin-top:12px;padding-top:26px;gap:10px}
+.dynasty-child-family .dynasty-children:before{content:'';position:absolute;top:-13px;height:13px;width:2px;background:#c9b58b}
+.dynasty-controls{position:absolute;right:12px;bottom:12px;z-index:10;display:flex;gap:6px;background:#111c;padding:6px;border:1px solid #555;border-radius:8px}
+.dynasty-controls button{padding:5px 10px}
+.dynasty-branch-list{min-width:190px}
+.executive-tree{overflow:visible}
+.minister-grid{align-items:stretch!important;grid-auto-rows:1fr}
+.minister-card{height:100%;display:flex;flex-direction:column;align-items:stretch}
+.minister-person{flex:1;min-height:178px;justify-content:flex-start}
+.minister-person img,.minister-person .minister-avatar{flex:0 0 105px}
+.ministry-link{margin-top:auto;min-height:42px;white-space:normal}
+.minister-bonus{display:none!important}
+/* Tooltips are placed by JS in viewport coordinates, never clipped by card edges. */
+.ui-floating-tooltip{position:fixed;z-index:10000;display:none;max-width:min(320px,calc(100vw - 24px));padding:10px 12px;background:#101012;border:1px solid #9b825b;border-radius:7px;color:#eee;font:12px/1.5 Inter,system-ui;white-space:pre-line;box-shadow:0 8px 24px #000c;pointer-events:none}
+@media(max-width:760px){.dynasty-workspace{grid-template-columns:1fr}.dynasty-canvas-wrap{max-height:55vh;min-height:360px}.minister-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.minister-person{min-height:160px}}

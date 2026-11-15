@@ -1,0 +1,17 @@
+{
+  "turn": 1,
+  "entityCreations": [
+    {
+      "id": "VIR-NUEVA-ESPANA",
+      "name": "Virreinato de Nueva España",
+      "entityType": "viceroyalty",
+      "status": "non",
+      "overlord": "ESP",
+      "leader": "",
+      "government": "Virreinato",
+      "color": "#b79a68",
+      "flag": "",
+      "coat": ""
+    }
+  ]
+}

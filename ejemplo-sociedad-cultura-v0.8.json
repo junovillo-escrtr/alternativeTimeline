@@ -1,0 +1,183 @@
+{
+  "turn": 3,
+  "date": "1770-06-14",
+  "name": "Sociedad y cultura — prueba v0.8",
+  "societyCulture": {
+    "@player": {
+      "metrics": {
+        "socialCohesion": 72,
+        "sharedIdentity": 64,
+        "education": 58,
+        "culturalPrestige": 81,
+        "culturalInfluence": 76
+      },
+      "sections": [
+        {
+          "id": "sociedad",
+          "title": "Sociedad y cohesión",
+          "description": "Integración y convivencia de los territorios.",
+          "items": [
+            {
+              "id": "integracion-corona",
+              "name": "Política de integración de la Corona",
+              "type": "Política social",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Real_de_Madrid_-_01.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Real_de_Madrid_-_01.jpg",
+              "founded": "Desde 1760",
+              "location": "Territorios de la Monarquía",
+              "owner": "La Corona",
+              "status": "En desarrollo",
+              "description": "Medidas para reforzar la cooperación sin eliminar las identidades y costumbres locales.",
+              "indicators": {
+                "Integración": 68,
+                "Aceptación": 63,
+                "Cooperación": 71
+              },
+              "contribution": "Puede reforzar la cohesión si respeta la diversidad territorial."
+            }
+          ]
+        },
+        {
+          "id": "tradiciones",
+          "title": "Tradiciones y celebraciones",
+          "description": "Fiestas y ceremonias compartidas.",
+          "items": [
+            {
+              "id": "fiesta-monarquia",
+              "name": "Fiesta de la Monarquía",
+              "type": "Celebración nacional — ficticia",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Charles_III_of_Spain.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Charles_III_of_Spain.jpg",
+              "founded": "1760",
+              "location": "Principales ciudades",
+              "founder": "La Corona",
+              "status": "Celebración anual",
+              "description": "Jornada de ceremonias, actos públicos y festejos en los territorios de la Monarquía.",
+              "indicators": {
+                "Participación": 74,
+                "Aceptación social": 69,
+                "Continuidad": 82,
+                "Cohesión": 76
+              },
+              "effects": [
+                "Refuerza los símbolos compartidos.",
+                "Una imposición cultural puede generar rechazo."
+              ],
+              "contribution": "Favorece la identidad común y la cohesión entre territorios."
+            }
+          ]
+        },
+        {
+          "id": "arte-cultura",
+          "title": "Arte y cultura",
+          "description": "Creación artística, conocimiento y vida intelectual.",
+          "items": [
+            {
+              "id": "academia-san-fernando",
+              "name": "Real Academia de Bellas Artes de San Fernando",
+              "type": "Academia artística",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Real_Academia_de_Bellas_Artes_de_San_Fernando_Madrid.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Real_Academia_de_Bellas_Artes_de_San_Fernando_Madrid.jpg",
+              "founded": "1744",
+              "location": "Madrid",
+              "founder": "Felipe V; inaugurada bajo Fernando VI",
+              "status": "Activa",
+              "description": "Institución dedicada a la enseñanza y promoción de las bellas artes.",
+              "indicators": {
+                "Conservación": 90,
+                "Actividad": 85,
+                "Prestigio": 88,
+                "Financiación": 76
+              },
+              "contribution": "Impulsa la formación artística y el prestigio cultural."
+            }
+          ]
+        },
+        {
+          "id": "instituciones-patrimonio",
+          "title": "Instituciones y patrimonio",
+          "description": "Instituciones vivas y bienes patrimoniales.",
+          "items": [
+            {
+              "id": "escuela-doma-murcia",
+              "name": "Escuela Real de Doma Clásica de Murcia",
+              "type": "Institución ecuestre — ficticia",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Spanish_Riding_School_Vienna.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Spanish_Riding_School_Vienna.jpg",
+              "founded": "1774",
+              "location": "Murcia",
+              "founder": "Iniciativa de la Corona",
+              "owner": "Real institución",
+              "status": "En funcionamiento",
+              "description": "Centro dedicado a la formación ecuestre, la doma clásica y la preparación de caballos para ceremonias y exhibiciones.",
+              "indicators": {
+                "Mantenimiento": 86,
+                "Calidad": 91,
+                "Personal": 78,
+                "Financiación": 83,
+                "Prestigio internacional": 72
+              },
+              "effects": [
+                "Atrae maestros y alumnos extranjeros.",
+                "Requiere financiación y mantenimiento continuos."
+              ],
+              "history": [
+                {
+                  "date": "1774",
+                  "text": "Fundación de la escuela."
+                },
+                {
+                  "date": "1782",
+                  "text": "Ampliación de las instalaciones."
+                }
+              ],
+              "contribution": "Contribuye a la formación especializada y al prestigio ecuestre."
+            },
+            {
+              "id": "monumento-ejemplo",
+              "name": "Real Palacio de Madrid",
+              "type": "Monumento y patrimonio",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Royal_Palace_of_Madrid_from_the_Sabatini_Gardens.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Royal_Palace_of_Madrid_from_the_Sabatini_Gardens.jpg",
+              "founded": "Construcción iniciada en 1738",
+              "location": "Madrid",
+              "owner": "Corona",
+              "status": "Conservado",
+              "description": "Residencia y símbolo representativo de la Monarquía.",
+              "indicators": {
+                "Conservación": 92,
+                "Integridad patrimonial": 95,
+                "Prestigio": 89
+              },
+              "contribution": "Refuerza la representación institucional y el patrimonio histórico."
+            }
+          ]
+        },
+        {
+          "id": "prestigio",
+          "title": "Prestigio e influencia cultural",
+          "description": "Proyección cultural dentro y fuera de las fronteras.",
+          "items": [
+            {
+              "id": "red-academica",
+              "name": "Red de academias y eruditos",
+              "type": "Influencia cultural",
+              "cardImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Library_of_the_Royal_Palace_of_Madrid.jpg",
+              "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Library_of_the_Royal_Palace_of_Madrid.jpg",
+              "founded": "En expansión",
+              "location": "Madrid y principales ciudades",
+              "status": "Activa",
+              "description": "Red de intercambio entre academias, bibliotecas, científicos y artistas.",
+              "indicators": {
+                "Intercambio internacional": 70,
+                "Atracción de talento": 66,
+                "Difusión cultural": 78
+              },
+              "contribution": "Proyecta el conocimiento y la cultura de la Monarquía en el extranjero."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

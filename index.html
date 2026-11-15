@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Línea de Tiempo Alternativa — v0.9.12</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/base.css">
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/institutions.css">
+
+<link rel="stylesheet" href="css/overrides.css">
+
+<script src="js/core/module-loader.js"></script>
+</head>
+<body><div class="app">
+<header class="top"><div class="brand">LÍNEA DE TIEMPO <span>ALTERNATIVA</span></div><small>Constructor de escenarios históricos</small><button id="homeBtn" class="top-home">Inicio</button><div id="globalRank" class="global-rank hidden" title="Ranking estimado según los datos disponibles de la partida"><img id="rankFlag" alt="Bandera del país jugador"><div class="rank-country"><b id="rankCountryName">País</b><small>Posición de poder global</small></div><strong id="rankPosition">—/—</strong></div></header>
+<section id="home" class="screen home active"><h1>Visor geopolítico</h1><p>Construye escenarios alternativos por fecha.</p><button class="primary" id="createBtn">Crear escenario</button><button id="newGameBtn">Nueva partida</button><button id="loadGameBtn">Cargar partida</button><small>Crear escenarios, iniciar campañas y continuar partidas guardadas.</small></section>
+<section id="editor" class="screen editor"><div class="mapwrap"><div id="map"></div><div class="maptools">Click izquierdo: asignar provincia · Shift + click: establecer capital<br>Click derecho: retirar provincia del país seleccionado · Arrastrar y rueda: navegar</div><div class="maploading" id="mapLoading">Cargando mapa regional…</div></div>
+<aside class="side"><div class="sidehead">Creador de escenarios</div><div class="sidebody">
+<div class="section"><div class="row"><button id="loadScenario">Cargar escenario</button><button id="importGeo">Importar GeoJSON</button></div><input id="scenarioFile" type="file" accept=".json,application/json" hidden><input id="geoFile" type="file" accept=".geojson,.json,application/geo+json,application/json" hidden><div class="hint">Carga un escenario guardado o sustituye la cartografía base por tu propio GeoJSON.</div></div>
+<div class="section"><label>Fecha del escenario</label><div class="datebar"><select id="dateSelect"></select><button id="addDate" title="Añadir fecha">+ Fecha</button></div><div class="hint">Cada fecha tiene su propia lista de países, territorios y capitales.</div></div>
+<div class="section"><button class="primary" id="newNation" style="width:100%">＋ Crear nación</button><div class="hint">Selecciona una nación de la lista y pinta sus provincias en el mapa.</div><div id="nationList" class="nation-list"><div class="empty">Todavía no hay naciones para esta fecha.</div></div></div>
+<div class="section"><div style="font-weight:600;margin-bottom:8px">País seleccionado</div><div id="selectedInfo" class="empty">Selecciona o crea una nación.</div></div>
+<div class="section"><label>Nombre del escenario</label><input id="scenarioName" value="Nuevo escenario histórico" placeholder="Nombre del escenario"><div class="row" style="margin-top:10px"><button id="saveScenario" class="primary">Guardar escenario</button><button id="exportScenario">Exportar JSON</button></div><div class="hint">Guardar almacena una copia local en este navegador. Exportar descarga el archivo .json.</div></div>
+</div><div class="status"><span id="mapStatus">Mapa pendiente</span><span id="provinceCount">—</span></div></aside></section>
+<section id="gameScreen">
+  <div class="game-main">
+    <div class="game-toolbar">
+      <div class="toolbar-group" role="group" aria-label="Modos cartográficos">
+        <span class="toolbar-label">Mapa</span>
+        <div class="map-modebar">
+          <button class="map-mode active" data-map-mode="political" title="Vista territorial: una superficie por entidad política y Territorio Baldío">Territorial</button>
+          <button class="map-mode" data-map-mode="maritime">Influencia marítima</button>
+          <button class="map-mode" data-map-mode="trade">Rutas comerciales</button>
+          <button class="map-mode" data-map-mode="strategic">Control estratégico</button>
+          <button class="map-mode" data-map-mode="concessions">Concesiones</button>
+        </div>
+      </div>
+      <div class="toolbar-group" role="group" aria-label="Instituciones del Estado">
+        <span class="toolbar-label">Estado</span>
+        <button class="state-action hidden" id="dynastyBtn">♛ Dinastía</button>
+        <button class="state-action hidden" id="governmentBtn">▥ Gobierno</button>
+        <button class="state-action hidden" id="armedForcesBtn">⚔ Fuerzas Armadas</button>
+        <button class="state-action hidden" id="societyCultureBtn">✦ Sociedad y cultura</button>
+      </div>
+    </div>
+    <div class="game-mapwrap">
+      <div class="map-legend"><span class="legend-dot"></span> Control territorial · <span id="mapModeCaption">Vista política</span></div>
+      <div id="gameMap"></div>
+
+<div id="concessionView" aria-label="Gestión de concesiones">
+ <div class="cv-shell">
+  <div class="cv-top">
+   <div><div class="cv-eyebrow">Línea de Tiempo Alternativa · Administración especial</div><div class="cv-title" id="cvHeading">Concesiones</div><div class="cv-subtitle" id="cvSubtitle">Enclaves y regímenes especiales dentro de territorios anfitriones. Cada concesión conserva sus propias condiciones y competencias.</div></div>
+   <div class="cv-actions"><button class="cv-btn" data-c-action="export">Exportar datos</button><button class="cv-btn primary" data-c-action="new">＋ Nueva concesión</button></div>
+  </div>
+  <div id="cvDirectory">
+   <div class="cv-filters">
+    <div><label for="cvSearch">Buscar</label><input id="cvSearch" placeholder="Ciudad, concesión o potencia…"></div>
+    <div><label for="cvFilterAdmin">Potencia concesionaria</label><select id="cvFilterAdmin"><option value="">Todas</option></select></div>
+    <div><label for="cvFilterHost">Estado anfitrión</label><select id="cvFilterHost"><option value="">Todos</option></select></div>
+    <div><label for="cvFilterStatus">Situación</label><select id="cvFilterStatus"><option value="">Todas</option><option value="active">Activa</option><option value="suspended">Suspendida</option><option value="negotiation">En negociación</option><option value="ended">Extinguida</option></select></div>
+   </div>
+   <div class="cv-statrow" id="cvStats"></div>
+   <div class="cv-directory">
+    <div class="cv-panel"><div class="cv-panel-head"><b>Concesiones registradas en esta fecha</b><span class="cv-pill" id="cvCount">0</span></div><div class="cv-panel-body"><div class="cv-list" id="cvList"></div></div></div>
+    <div class="cv-panel"><div class="cv-world-card"><div class="cv-world-icon">◎</div><h3>Directorio mundial de concesiones</h3><p>Selecciona una concesión de la lista para abrir su mapa urbano individual. Las concesiones no colorean ni modifican las provincias del mapa político mundial.</p><p id="cvWorldSummary"></p></div></div>
+   </div>
+  </div>
+  <div id="cvDetail" class="cv-detail" style="display:none"></div>
+ </div>
+ <div class="cv-modal-back" id="cvModalBack">
+  <div class="cv-modal">
+   <div class="cv-modal-head"><b id="cvModalTitle">Nueva concesión</b><button class="cv-btn" data-c-action="close-modal">✕</button></div>
+   <form id="cvForm" class="cv-form">
+    <input type="hidden" id="cvEditId">
+    <div class="cv-form-grid">
+     <div><label for="cvName">Nombre de la concesión *</label><input id="cvName" required placeholder="Ej. Concesión de Nagasaki"></div>
+     <div><label for="cvCity">Ciudad o localidad *</label><input id="cvCity" required placeholder="Ej. Nagasaki"></div>
+     <div><label for="cvHost">Estado anfitrión *</label><input id="cvHost" required placeholder="Ej. Japón" list="cvNations"></div>
+     <div><label for="cvAdmin">Potencia concesionaria *</label><input id="cvAdmin" required placeholder="Ej. Países Bajos" list="cvNations"></div>
+     <datalist id="cvNations"></datalist>
+     <div><label for="cvType">Tipo de régimen</label><select id="cvType"><option value="urban">Concesión urbana</option><option value="commercial">Concesión comercial</option><option value="port">Concesión portuaria</option><option value="infrastructure">Infraestructura</option><option value="international">Régimen internacional</option><option value="other">Otro régimen especial</option></select></div>
+     <div><label for="cvStatus">Situación</label><select id="cvStatus"><option value="active">Activa</option><option value="suspended">Suspendida</option><option value="negotiation">En negociación</option><option value="ended">Extinguida</option></select></div>
+     <div><label for="cvStart">Fecha de entrada en vigor</label><input id="cvStart" type="text" placeholder="AAAA-MM-DD"></div>
+     <div><label for="cvEnd">Fecha de finalización (opcional)</label><input id="cvEnd" type="text" placeholder="AAAA-MM-DD"></div>
+    </div>
+    <div class="cv-section-label">Competencias concedidas por el anfitrión</div>
+    <div class="cv-checkgrid">
+     <label class="cv-check"><input type="checkbox" id="cvCompAdmin" checked> Administración civil</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompPolice"> Policía propia</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompOrder"> Orden público</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompCourts"> Tribunales propios</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompTax"> Recaudación fiscal</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompCustoms"> Aduanas y comercio</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompInfra" checked> Infraestructuras y servicios</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompEducation"> Educación y cultura</label>
+     <label class="cv-check"><input type="checkbox" id="cvCompMilitary"> Presencia militar</label>
+    </div>
+    <div class="cv-section-label">Economía y contraprestaciones</div>
+    <div class="cv-form-grid">
+     <label class="cv-check"><input type="checkbox" id="cvBudget" checked> Presupuesto propio</label>
+     <div><label for="cvBudgetValue">Presupuesto inicial (unidades abstractas)</label><input id="cvBudgetValue" type="number" min="0" step="1" value="0"></div>
+     <div><label for="cvPayment">Contraprestación al anfitrión</label><select id="cvPayment"><option value="none">Sin contraprestación directa</option><option value="fixed">Canon fijo</option><option value="percentage">Porcentaje de ingresos</option><option value="negotiated">Según acuerdo</option></select></div>
+     <div><label for="cvPaymentValue">Valor / porcentaje (opcional)</label><input id="cvPaymentValue" placeholder="Ej. 10 % o 500"></div>
+    </div>
+    <div><label for="cvNotes">Condiciones y notas del acuerdo</label><textarea id="cvNotes" placeholder="Derechos, límites, obligaciones, relación con el anfitrión…"></textarea></div>
+    <div class="cv-hint">Las competencias no se presuponen: las casillas representan únicamente los derechos concedidos en el acuerdo. La seguridad y el orden público pueden corresponder al concesionario, al anfitrión o repartirse mediante condiciones específicas.</div>
+   </form>
+   <div class="cv-modal-foot"><button class="cv-btn" data-c-action="close-modal">Cancelar</button><button class="cv-btn primary" data-c-action="submit-form">Guardar concesión</button></div>
+  </div>
+ </div>
+</div>
+
+      <div id="entityCreationPanel" class="entity-creation-panel hidden" role="region" aria-label="Delimitación de nueva entidad política">
+        <div class="entity-creation-head"><b id="entityCreationTitle">Nueva entidad política</b><span id="entityCreationStep" class="pill">1 / 1</span></div>
+        <p id="entityCreationDescription" class="hint">Selecciona en el mapa las provincias que formarán la entidad.</p>
+        <div class="entity-creation-count"><strong id="entityProvinceCount">0</strong> provincias seleccionadas</div>
+        <label>Color territorial</label><input id="entityCreationColor" type="color" value="#b79a68">
+        <label>Bandera (opcional)</label><input id="entityCreationFlag" type="url" placeholder="URL de la imagen"><input id="entityCreationFlagFile" type="file" accept="image/*" aria-label="Subir bandera">
+        <label>Escudo (opcional)</label><input id="entityCreationCoat" type="url" placeholder="URL de la imagen"><input id="entityCreationCoatFile" type="file" accept="image/*" aria-label="Subir escudo">
+        <div class="entity-creation-actions"><button id="entityCreationCancel">Cancelar</button><button class="primary" id="entityCreationSave">Crear entidad</button></div>
+      </div>
+    </div>
+    <section class="chronicle">
+      <div class="chronicle-head"><div style="display:flex;align-items:center;gap:9px;min-width:0"><button id="chronicleToggle" class="chronicle-toggle" type="button" aria-expanded="true" aria-controls="chronicleList" title="Ocultar cronología"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.25 5.75 8 10.5l4.75-4.75" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b>Crónica de la campaña</b> <span class="pill" id="chronicleTurn">Turno 0</span></div><div class="row" style="flex:0 0 auto"><span id="gameStatus" class="hint">Partida iniciada</span><button id="turnEditorBtn">Editor de turno</button><button id="saveGameBtn" class="primary">Guardar partida</button></div></div>
+      <div class="chronicle-list" id="chronicleList"></div>
+    </section>
+  </div>
+  <aside class="game-side">
+    <div class="sidehead" id="gameSideTitle">Información del país</div>
+    <div class="game-side-content" id="countryInfo"><div class="game-empty">Cargando información…</div></div>
+  </aside>
+</section>
+</div>
+<div class="modalback" id="nationModal"><div class="modal"><div class="modalhead"><span id="modalTitle">Crear nación</span><button id="closeModal">✕</button></div><div class="modalbody"><div class="grid2"><div><label>Nombre del país *</label><input id="fName" placeholder="Ej. Reino de Portugal"></div><div><label>Color del mapa *</label><input id="fColor" type="color" value="#b64d4d"></div></div><div class="grid2"><div><label>URL de la bandera</label><input id="fFlagUrl" placeholder="https://…"></div><div><label>Subir bandera</label><label class="filebtn">Elegir imagen<input id="fFlagFile" type="file" accept="image/*"></label></div></div><div class="grid2"><div><label>URL del escudo</label><input id="fCoatUrl" placeholder="https://…"></div><div><label>Subir escudo</label><label class="filebtn">Elegir imagen<input id="fCoatFile" type="file" accept="image/*"></label></div></div><label>Tipo de estado</label><select id="fStatus"><option value="sovereign">Estado soberano (independiente)</option><option value="semi">Estado semisoberano (protectorado/tributario)</option><option value="non">Estado no soberano (subordinado)</option></select><div id="overlordWrap" class="hidden"><label id="overlordLabel">Estado superior / soberano</label><select id="fOverlord"><option value="">Selecciona un país</option></select></div><div id="leaderWrap"><div class="grid2"><div><label>Nombre del líder</label><input id="fLeader" placeholder="Nombre del monarca o jefe de Estado"></div><div><label>URL del retrato</label><input id="fPortraitUrl" placeholder="https://…"></div></div><label>Subir retrato del líder</label><label class="filebtn">Elegir imagen<input id="fPortraitFile" type="file" accept="image/*"></label></div><label>Tipo de gobierno</label><input id="fGovernment" placeholder="Ej. Monarquía constitucional"><div class="hint" id="inheritHint">Los estados no soberanos heredan automáticamente el líder del soberano seleccionado.</div></div><div class="modalfoot"><button id="cancelNation">Cancelar</button><button class="primary" id="saveNation">Guardar nación</button></div></div></div>
+
+<div class="modalback" id="gameSetupModal"><div class="modal modal-wide"><div class="modalhead"><span id="gameSetupTitle">Nueva partida</span><button id="closeGameSetup">✕</button></div><div class="modalbody">
+ <label>Escenario</label><select id="setupScenario"><option value="">Selecciona un escenario guardado</option></select>
+ <label>País que dirigirás</label><select id="setupCountry"><option value="">Primero selecciona un escenario</option></select>
+ <div class="hint" id="setupHint">El país elegido será tu nación. Verás toda la información de tus estados subordinados, información parcial de protectorados y datos públicos de países extranjeros.</div>
+ </div><div class="modalfoot"><button id="cancelGameSetup">Cancelar</button><button class="primary" id="startGameBtn">Continuar</button></div></div></div>
+<div class="modalback" id="administrationsModal"><div class="modal modal-wide"><div class="modalhead"><span>Administraciones territoriales</span><button id="closeAdministrations">✕</button></div><div class="modalbody"><p class="hint" style="margin-top:0">Las administraciones son divisiones territoriales subordinadas; no se convierten en Estados ni alteran la soberanía de las provincias.</p><div class="grid2"><div><label>Nombre</label><input id="adminName" placeholder="Ej. Virreinato de Nueva España"></div><div><label>Tipo</label><select id="adminType"><option value="viceroyalty">Virreinato</option><option value="governorate">Gobernación</option><option value="region">Región administrativa</option><option value="autonomous">Región autónoma</option><option value="province">Provincia administrativa</option><option value="other">Otra</option></select></div></div><div class="grid2"><div><label>Entidad superior</label><select id="adminParent"></select></div><div><label>Color</label><input id="adminColor" type="color" value="#b79a68"></div></div><label>Administración superior (opcional)</label><select id="adminParentAdmin"><option value="">Ninguna</option></select><div class="row" style="margin-top:12px"><button class="primary" id="createAdministration">Crear administración</button><button id="assignAdministration" disabled>Asignar provincias en el mapa</button></div><div class="hint" id="adminStatus">Selecciona o crea una administración. Después pulsa «Asignar provincias en el mapa» y haz clic en sus provincias.</div><div id="administrationList" class="admin-list"></div></div><div class="modalfoot"><button id="closeAdministrationsFoot">Cerrar</button></div></div></div>
+<div class="modalback" id="loadGameModal"><div class="modal modal-wide"><div class="modalhead"><span>Cargar partida</span><button id="closeLoadGame">✕</button></div><div class="modalbody"><label>Partidas guardadas</label><select id="savedGameSelect"><option value="">Selecciona una partida</option></select><div class="hint">También puedes importar un archivo JSON de partida guardado en tu ordenador o nube.</div><label style="margin-top:12px">Importar archivo de partida</label><input type="file" id="importGameFile" accept=".json,application/json"></div><div class="modalfoot"><button id="cancelLoadGame">Cancelar</button><button class="primary" id="confirmLoadGame">Cargar</button></div></div></div>
+
+
+<div class="modalback" id="turnEditorModal"><div class="modal modal-wide turn-editor">
+ <div class="modalhead"><span>Aplicar turno desde instrucciones / JSON</span><button id="closeTurnEditor">✕</button></div>
+ <div class="modalbody">
+  <div class="turn-help">Pega aquí el bloque JSON que acompaña al avance del turno. Se aplicarán los cambios territoriales, indicadores, fecha, turno y acontecimientos que incluya. La aplicación valida el bloque antes de modificar la partida.</div>
+  <textarea id="turnPayload" spellcheck="false" placeholder='{
+  "turn": 1,
+  "date": "1771",
+  "events": [{"title":"Acontecimiento","text":"Descripción del acontecimiento","date":"1771"}],
+  "metrics": {"stability": 70, "economy": 60, "support": 65, "military": 52, "administration": 62},
+  "territorialChanges": [{"provinceId":"ES1","ownerId":"country-id"}]
+}'></textarea>
+  <div class="turn-help">Los cambios territoriales usan los identificadores existentes. Para crear entidades políticas incluye entityCreations: la interfaz te pedirá seleccionar sus provincias en el mapa. Los indicadores admiten valores de 0 a 100.</div>
+ </div>
+ <div class="modalfoot"><button id="cancelTurnEditor">Cancelar</button><button class="primary" id="applyTurnBtn">Aplicar turno</button></div>
+</div></div>
+
+<div class="modalback" id="eventModal"><div class="modal event-modal"><div class="modalhead"><div><div id="eventModalMeta" class="event-meta"></div><span id="eventModalTitle" class="event-modal-title">Acontecimiento</span></div><button data-close-modal="eventModal">✕</button></div><div class="modalbody event-content" id="eventModalBody"></div><div class="event-review-foot hidden" id="eventReviewFoot"><span class="review-count" id="eventReviewCount"></span><div class="row" style="justify-content:flex-end"><button id="finishEventReview">Terminar revisión</button><button class="primary" id="nextReviewEvent">Siguiente evento →</button></div></div></div></div>
+<div class="modalback" id="dynastyModal"><div class="modal institution-modal"><div class="modalhead"><span id="dynastyModalTitle">Dinastía</span><button data-close-modal="dynastyModal">✕</button></div><div class="modalbody" id="dynastyModalBody"></div></div></div>
+<div class="modalback" id="parliamentModal"><div class="modal institution-modal"><div class="modalhead"><span id="parliamentModalTitle">Parlamento</span><button data-close-modal="parliamentModal">✕</button></div><div class="modalbody" id="parliamentModalBody"></div></div></div>
+<div class="modalback" id="armedForcesModal"><div class="modal institution-modal forces-modal"><div class="modalhead"><span id="armedForcesModalTitle">Fuerzas Armadas</span><button data-close-modal="armedForcesModal">✕</button></div><div class="modalbody" id="armedForcesModalBody"></div></div></div>
+<div class="modalback" id="societyCultureModal"><div class="modal institution-modal society-modal"><div class="modalhead"><span id="societyCultureModalTitle">Sociedad y cultura</span><button data-close-modal="societyCultureModal">✕</button></div><div class="modalbody" id="societyCultureModalBody"></div></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<script src="js/core/map-data-loader.js"></script>
+
+<script src="js/core/map-helpers.js"></script>
+<script src="js/modules/scenario-editor.js"></script>
+<script src="js/modules/game.js"></script>
+<script src="js/modules/concessions.js"></script>
+</body></html>
+
+

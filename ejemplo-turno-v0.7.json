@@ -1,0 +1,447 @@
+{
+  "turn": 2,
+  "date": "1770-06-14",
+  "name": "Prueba de funcionalidades v0.7",
+  "metrics": {
+    "stability": 74,
+    "economy": 68,
+    "support": 61,
+    "military": 57,
+    "administration": 72
+  },
+  "countryMetrics": {
+    "N-mvxm997q-w3gv": {
+      "stability": 76,
+      "economy": 71,
+      "support": 64,
+      "military": 59,
+      "administration": 75
+    }
+  },
+  "publicEstimates": {
+    "N-mvxm997q-w3gv": {
+      "economy": 69,
+      "military": 62
+    }
+  },
+  "dynasties": {
+    "N-mvxm997q-w3gv": {
+      "name": "Casa de Borbón",
+      "crest": "https://commons.wikimedia.org/wiki/Special:FilePath/Coat_of_Arms_of_the_House_of_Bourbon.svg",
+      "head": {
+        "name": "Carlos III",
+        "title": "Rey de España, de las Dos Sicilias y de Jerusalén",
+        "titles": [
+          "Rey de España",
+          "Rey de las Dos Sicilias",
+          "Rey de Jerusalén",
+          "Duque de Parma",
+          "Conde de Barcelona"
+        ],
+        "portrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Anton_Raphael_Mengs_-_Charles_III_of_Spain.jpg"
+      },
+      "members": [
+        {
+          "name": "María Amalia de Sajonia",
+          "title": "Reina consorte",
+          "relation": "Esposa de Carlos III",
+          "spouse": "Carlos III",
+          "children": [
+            "Carlos IV",
+            "Fernando I de las Dos Sicilias",
+            "Gabriel de Borbón"
+          ],
+          "portrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Maria_Amalia_of_Saxony.jpg"
+        },
+        {
+          "name": "Carlos Antonio de Borbón",
+          "title": "Príncipe de Asturias",
+          "relation": "Hijo y heredero",
+          "spouse": "María Luisa de Parma",
+          "children": [
+            "Fernando VII",
+            "Carlos María Isidro"
+          ],
+          "portrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Charles_IV_of_Spain_by_Francisco_Goya.jpg"
+        },
+        {
+          "name": "Gabriel de Borbón",
+          "title": "Infante de España",
+          "relation": "Hijo del monarca",
+          "spouse": "Mariana Victoria de Portugal",
+          "children": [
+            "Pedro Carlos de Borbón"
+          ],
+          "portrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Infante_Gabriel_of_Spain.jpg"
+        },
+        {
+          "name": "Fernando de Borbón",
+          "title": "Infante de España",
+          "relation": "Hijo del monarca",
+          "spouse": "María Carolina de Austria",
+          "children": [],
+          "portrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Ferdinand_I_of_the_Two_Sicilies.jpg"
+        }
+      ]
+    }
+  },
+  "parliaments": {
+    "N-mvxm997q-w3gv": [
+      {
+        "id": "cortes-generales",
+        "name": "Cortes Generales de la Monarquía Hispánica",
+        "seats": 72,
+        "featuredPartyId": "brazo-nobiliario",
+        "parties": [
+          {
+            "id": "brazo-nobiliario",
+            "name": "Brazo nobiliario",
+            "color": "#95613f",
+            "seats": 24,
+            "leader": "Duque de Alba",
+            "leaderPortrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Francisco_de_Goya_-_Portrait_of_the_Duke_of_Alba.jpg",
+            "position": "Defensa de los privilegios estamentales, la propiedad nobiliaria y la autoridad tradicional."
+          },
+          {
+            "id": "brazo-eclesiastico",
+            "name": "Brazo eclesiástico",
+            "color": "#8064a2",
+            "seats": 18,
+            "leader": "Cardenal de Toledo",
+            "leaderPortrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Cardinal_portrait_by_Pompeo_Batoni.jpg",
+            "position": "Representación de los intereses de la Iglesia y defensa de su papel en la Monarquía."
+          },
+          {
+            "id": "procuradores-urbanos",
+            "name": "Procuradores de las ciudades",
+            "color": "#3976a8",
+            "seats": 18,
+            "leader": "Procurador de Madrid",
+            "leaderPortrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_of_a_man_by_Anton_Raphael_Mengs.jpg",
+            "position": "Intereses municipales, comercio, fiscalidad urbana y obras públicas."
+          },
+          {
+            "id": "consejeros-corona",
+            "name": "Consejeros de la Corona",
+            "color": "#a28b3c",
+            "seats": 12,
+            "leader": "Conde de Floridablanca",
+            "leaderPortrait": "https://commons.wikimedia.org/wiki/Special:FilePath/Jose_Monian_y_Marquez_-_Jose_Mo%C3%B1ino,_Count_of_Floridablanca.jpg",
+            "position": "Reformismo administrativo y apoyo a las iniciativas de la Corona."
+          }
+        ]
+      }
+    ]
+  },
+  "events": [
+    {
+      "date": "1770-06-14",
+      "title": "La Corona impulsa una reforma de los arsenales",
+      "text": "Se presenta un programa para modernizar los arsenales reales y reforzar la capacidad naval de la Monarquía.",
+      "type": "turn",
+      "category": "naval",
+      "icon": "⚓",
+      "content": [
+        {
+          "type": "image",
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Arsenal_of_Ferrol.jpg",
+          "alt": "Vista histórica de un arsenal naval",
+          "caption": "Vista ilustrativa de las instalaciones navales de la época."
+        },
+        {
+          "type": "heading",
+          "text": "Un programa de modernización"
+        },
+        {
+          "type": "text",
+          "text": "La Secretaría de Marina propone ampliar los talleres, mejorar los almacenes de pertrechos y establecer un calendario estable de mantenimiento para los navíos de guerra."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ampliación de los talleres de carpintería naval.",
+            "Compra centralizada de cáñamo, hierro y madera.",
+            "Revisión de los contratos de construcción y reparación."
+          ]
+        }
+      ]
+    },
+    {
+      "date": "1770-06-14",
+      "title": "Negociaciones comerciales y tensiones en la frontera",
+      "text": "El Gobierno recibe informes sobre nuevas conversaciones comerciales y movimientos militares en la frontera oriental.",
+      "type": "turn",
+      "category": "diplomacy",
+      "icon": "🤝",
+      "content": [
+        {
+          "type": "text",
+          "text": "Durante la sesión del Consejo se examinan tres asuntos de especial importancia para la política exterior. Los informes recibidos aconsejan combinar la apertura comercial con una vigilancia prudente de las fronteras."
+        },
+        {
+          "type": "heading",
+          "text": "Tres acontecimientos del día"
+        },
+        {
+          "type": "row",
+          "imagePosition": "left",
+          "image": {
+            "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Signing_of_the_Treaty_of_Paris_1763.jpg",
+            "alt": "Representación de una negociación diplomática",
+            "caption": "Conversaciones diplomáticas."
+          },
+          "textBlocks": [
+            {
+              "type": "heading",
+              "text": "Acercamiento diplomático"
+            },
+            {
+              "type": "text",
+              "text": "Los enviados proponen reabrir las conversaciones para resolver las disputas aduaneras y normalizar el tránsito de mercancías por los pasos fronterizos."
+            }
+          ]
+        },
+        {
+          "type": "row",
+          "imagePosition": "right",
+          "image": {
+            "url": "https://commons.wikimedia.org/wiki/Special:FilePath/18th_century_military_camp.jpg",
+            "alt": "Campamento militar del siglo XVIII",
+            "caption": "Campamento militar, imagen ilustrativa."
+          },
+          "textBlocks": [
+            {
+              "type": "heading",
+              "text": "Movimientos en la frontera"
+            },
+            {
+              "type": "text",
+              "text": "Los gobernadores provinciales informan de un aumento de patrullas y convoyes. No se ha confirmado una movilización general, pero se refuerzan los puestos de observación."
+            }
+          ]
+        },
+        {
+          "type": "row",
+          "imagePosition": "left",
+          "image": {
+            "url": "https://commons.wikimedia.org/wiki/Special:FilePath/18th_century_trading_ship.jpg",
+            "alt": "Buque mercante del siglo XVIII",
+            "caption": "Navegación comercial."
+          },
+          "textBlocks": [
+            {
+              "type": "heading",
+              "text": "Perspectivas para el comercio"
+            },
+            {
+              "type": "text",
+              "text": "Los consulados mercantiles calculan que un acuerdo podría reducir los costes de transporte y aumentar las exportaciones de tejidos, herramientas y productos agrícolas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "1770-06-14",
+      "title": "Debate sobre las contribuciones extraordinarias",
+      "text": "Las Cortes consultivas estudian una propuesta de contribución temporal destinada a financiar las obras públicas y los arsenales.",
+      "type": "turn",
+      "category": "politics",
+      "icon": "🏛️",
+      "content": [
+        {
+          "type": "text",
+          "text": "La propuesta ha generado posiciones distintas entre los representantes de los estamentos. Los procuradores urbanos piden garantías sobre el destino de los fondos, mientras que los consejeros de la Corona defienden la urgencia de las inversiones."
+        },
+        {
+          "type": "heading",
+          "text": "Puntos sometidos a consulta"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Duración limitada de la contribución.",
+            "Publicación de las cuentas de las obras.",
+            "Revisión de la medida al cabo de dos ejercicios fiscales."
+          ]
+        }
+      ]
+    }
+  ],
+  "nationUpdates": {
+    "N-mvxm997q-w3gv": {
+      "leader": "Carlos III",
+      "government": "Monarquía Absoluta con Cortes Consultivas"
+    }
+  },
+  "armedForces": {
+    "N-mvxm997q-w3gv": {
+      "branches": [
+        {
+          "id": "ejercito-tierra",
+          "name": "Ejército de Tierra",
+          "icon": "⚔",
+          "formations": [
+            {
+              "id": "ejercito-norte",
+              "name": "Ejército del Norte",
+              "status": "Operativo",
+              "headquarters": "Pamplona, Navarra",
+              "location": "Navarra",
+              "provinceNames": [
+                "Navarra"
+              ],
+              "troops": 48000,
+              "composition": {
+                "Infantería": 28000,
+                "Caballería": 8000,
+                "Artillería": 7000,
+                "Ingenieros": 5000
+              },
+              "metrics": {
+                "discipline": 88,
+                "command": 79,
+                "logistics": 74,
+                "morale": 84,
+                "equipment": 76
+              }
+            },
+            {
+              "id": "ejercito-sur",
+              "name": "Ejército del Sur",
+              "status": "Operativo",
+              "headquarters": "Sevilla, Andalucía",
+              "location": "Andalucía",
+              "provinceNames": [
+                "Andalucía"
+              ],
+              "troops": 32000,
+              "composition": {
+                "Infantería": 19000,
+                "Caballería": 6000,
+                "Artillería": 4500,
+                "Ingenieros": 2500
+              },
+              "metrics": {
+                "discipline": 81,
+                "command": 75,
+                "logistics": 72,
+                "morale": 80,
+                "equipment": 73
+              }
+            },
+            {
+              "id": "guarnicion-centro",
+              "name": "Guarniciones del Centro",
+              "status": "En servicio",
+              "headquarters": "Madrid",
+              "location": "Madrid",
+              "provinceNames": [
+                "Comunidad de Madrid"
+              ],
+              "troops": 22000,
+              "composition": {
+                "Infantería": 15000,
+                "Caballería": 2500,
+                "Artillería": 2500,
+                "Ingenieros": 2000
+              },
+              "metrics": {
+                "discipline": 84,
+                "command": 80,
+                "logistics": 77,
+                "morale": 78,
+                "equipment": 79
+              }
+            }
+          ]
+        },
+        {
+          "id": "armada",
+          "name": "Armada",
+          "icon": "⚓",
+          "formations": [
+            {
+              "id": "escuadra-atlantico",
+              "name": "Escuadra del Atlántico",
+              "status": "Operativa",
+              "headquarters": "Ferrol, Galicia",
+              "location": "Galicia",
+              "provinceNames": [
+                "Galicia"
+              ],
+              "troops": 12500,
+              "composition": {
+                "Navíos de línea": 8,
+                "Fragatas": 12,
+                "Corbetas": 6,
+                "Transportes": 6
+              },
+              "metrics": {
+                "discipline": 86,
+                "command": 83,
+                "logistics": 78,
+                "morale": 82,
+                "equipment": 80
+              }
+            },
+            {
+              "id": "escuadra-mediterraneo",
+              "name": "Escuadra del Mediterráneo",
+              "status": "Operativa",
+              "headquarters": "Cartagena, Murcia",
+              "location": "Murcia",
+              "provinceNames": [
+                "Región de Murcia"
+              ],
+              "troops": 8400,
+              "composition": {
+                "Navíos de línea": 5,
+                "Fragatas": 8,
+                "Corbetas": 5,
+                "Transportes": 4
+              },
+              "metrics": {
+                "discipline": 82,
+                "command": 80,
+                "logistics": 75,
+                "morale": 79,
+                "equipment": 77
+              }
+            }
+          ]
+        },
+        {
+          "id": "ejercito-aire",
+          "name": "Ejército del Aire",
+          "icon": "✈",
+          "formations": [
+            {
+              "id": "ala-central",
+              "name": "Ala de defensa central",
+              "status": "Operativa",
+              "headquarters": "Madrid",
+              "location": "Madrid",
+              "provinceNames": [
+                "Comunidad de Madrid"
+              ],
+              "troops": 6800,
+              "composition": {
+                "Cazas": 48,
+                "Reconocimiento": 12,
+                "Transporte": 10
+              },
+              "metrics": {
+                "discipline": 79,
+                "command": 76,
+                "logistics": 70,
+                "morale": 81,
+                "equipment": 68
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
